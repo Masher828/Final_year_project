@@ -15,6 +15,7 @@ def externalodd_out(word_vector,words):
     odd_one=None
     min_simi=100
     for w in words:
+
         # words=words.strip()
         sim=cosine_similarity([word_vector[w.lower()]],[avg_vector])
         if sim<min_simi:

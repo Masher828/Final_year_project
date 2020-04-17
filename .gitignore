@@ -4,5 +4,11 @@ __pycache__/*
 venv/*
 Files.zip
 .idea/*
+<<<<<<< HEAD
 __pycache__
 .idea
+=======
+.idea
+__pycache__
+venv
+>>>>>>> origin/Chetan
