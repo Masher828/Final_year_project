@@ -1,0 +1,6 @@
+Files/*
+waste_files/*
+__pycache__/*
+venv/*
+Files.7z
+.idea/*
