@@ -1,0 +1,9 @@
+Files/*
+waste_files/*
+__pycache__/*
+venv/*
+Files.zip
+.idea/*
+.idea
+__pycache__
+venv
