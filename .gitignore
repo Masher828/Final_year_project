@@ -4,3 +4,5 @@ __pycache__/*
 venv/*
 Files.zip
 .idea/*
+__pycache__
+.idea

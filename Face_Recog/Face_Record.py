@@ -36,7 +36,8 @@ def facerec(name):
             x, y, w, h = face
             face_img = gray[y:y + h, x:x + w]
             face_img = cv2.resize(face_img, (100, 100))
-            cv2.imshow("FACE", image)
+
+            cv2.imshow("FACE", face_img)
             face_list.append(face_img.flatten())
             count -= 1
             print("{} Record Entered".format(50 - count))
