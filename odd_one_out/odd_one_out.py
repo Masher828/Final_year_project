@@ -5,6 +5,7 @@ from gensim.models import keyedvectors
 from sklearn.metrics.pairwise import cosine_similarity
 
 
+
 def externalodd_out(word_vector,words):
 
     words=words.split(",")

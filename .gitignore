@@ -1,1 +1,4 @@
-Files
+.idea/*
+__pychache__/*
+Files/*
+venv/*
