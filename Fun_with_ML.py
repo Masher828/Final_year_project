@@ -5,7 +5,11 @@ from win10toast import ToastNotifier
 import numpy as np
 from PIL import ImageTk, Image
 from win32api import GetSystemMetrics
-
+sys.path.insert(2, "Emoji_predictor/")
+sys.path.insert(3, "Image_Classification/")
+sys.path.insert(6, "Spam_or_Ham/")
+sys.path.insert(7, "Sentiment_Analysis/")
+sys.path.insert(8, "Titanic_Survivor/")
 
 import emojii, Flowers
 
