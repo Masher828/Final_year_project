@@ -4,11 +4,14 @@ __pycache__/*
 venv/*
 Files.zip
 .idea/*
-<<<<<<< HEAD
-__pycache__
-.idea
-=======
 .idea
 __pycache__
 venv
->>>>>>> origin/Chetan
+Word_analogy/__pycache__
+Titanic_Survivor/__pycache__
+Spam_or_Ham/__pycache__
+Sentiment_Analysis/__pycache__
+odd_one_out/__pycache__
+Image_Classification/__pycache__
+Face_Recog/__pycache__
+Emoji_Predictor/__pycache__
