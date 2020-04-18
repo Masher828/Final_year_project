@@ -11,6 +11,7 @@ sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
 sys.path.insert(7, "Sentiment_Analysis/")
 sys.path.insert(8, "Titanic_Survivor/")
+
 import emojii, Flowers
 
 
@@ -180,15 +181,15 @@ def emojipredict_image(glove_dicitionary, sent, emoji_predict_frame):
 
 def newFaceRecord(old_frame):
     old_frame.destroy()
-    face_record_frame = Frame(root)
+    face_record_frame = Frame(root, bg = "white")
     face_record_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(face_record_frame, "Face Classification")
     Label(face_record_frame, text="Enter the Name :", fg="#738f93", font='Helvetica 22 bold') \
-        .place(relx=0.004, rely=0.0249, relwidth=0.2, relheight=0.1)
-    entry = Entry(face_record_frame)
-    entry.place(relx=0.24, rely=0.0429, relwidth=0.3, relheight=0.04)
+        .place(relx=0.03, rely=0.2, relwidth=0.35, relheight=0.2)
+    entry = Entry(face_record_frame,font="Helvetica 30 bold ")
+    entry.place(relx=0.28, rely=0.2, relwidth=0.35, relheight=0.1)
     Button(face_record_frame, text="Record Face", bg="#013A55", font="Helvetica 18 bold",
-           command=lambda: Face_Record.facerec(entry.get())).place(relx=0.244, rely=0.2, relwidth=0.2, relheight=0.12)
+           command=lambda: Face_Record.facerec(entry.get())).place(relx=0.28, rely=0.45, relwidth=0.35, relheight=0.2)
 
 
 def facerecog(old_frame, check_call=None):
@@ -200,13 +201,13 @@ def facerecog(old_frame, check_call=None):
     new_user = ImageButton(face_recog_frame, image=get_image("facerecordnew"), second_image=get_image("facerecordnew"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=lambda: newFaceRecord(face_recog_frame))
-    new_user.place(relx=0.144, rely=0.17, relwidth=0.35, relheight=0.2)
+    new_user.place(relx=0.03, rely=0.2, relwidth=0.35, relheight=0.2)
 
     new_user = ImageButton(face_recog_frame, image=get_image("facerecordold"), second_image=get_image("facerecordold"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=Face_Recognition.face_rec)
 
-    new_user.place(relx=0.144, rely=0.41, relwidth=0.35, relheight=0.2)
+    new_user.place(relx=0.03, rely=0.45, relwidth=0.35, relheight=0.2)
 
 
 

@@ -3,7 +3,7 @@ import os  # To store or retrieve Face details
 
 import cv2  # To capture video and detect face in it
 import numpy as np  # For calculation and manipulating face details
-
+from tkinter import *
 
 # insert at 1, 0 is the script path (or '' in REPL)
 
@@ -17,7 +17,6 @@ def facerec(name):
     # Initialize the front camera of your laptop as 0 stands for inbuilt camera and it will start recording
     cap = cv2.VideoCapture(0)
 
-    print(name)
     face_list = []
     count = 50
     while count:
