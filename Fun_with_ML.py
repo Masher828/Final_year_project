@@ -9,11 +9,9 @@ from win32api import GetSystemMetrics
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
-sys.path.insert(7, "Sentiment_Analysis/")
 sys.path.insert(8, "Titanic_Survivor/")
 
 import emojii, Flowers
-import sentiment
 
 
 def second_menu(old_frame, module, func):
@@ -420,11 +418,12 @@ def about():
 
 class A(threading.Thread):
     def run(self):
-        global Face_Recognition, Face_Record, odd_one_out, word_analogy
+        global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment
         sys.path.insert(1, "Face_Recog/")
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
-
+        sys.path.insert(7, "Sentiment_Analysis/")
+        sentiment = __import__('sentiment',globals())
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())

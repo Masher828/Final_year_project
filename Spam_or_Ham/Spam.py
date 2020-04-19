@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 import re
 
-mails = pd.read_csv("datasets/spam.csv", encoding = 'latin-1')
+mails = pd.read_csv(path + "Dataset/spam.csv",header=None,encoding = 'latin-1)
 #mails.head()
 
 mails.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis = 1, inplace = True)
