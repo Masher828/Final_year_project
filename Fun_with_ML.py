@@ -9,6 +9,7 @@ from win32api import GetSystemMetrics
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
+
 sys.path.insert(8, "Titanic_Survivor/")
 
 import emojii, Flowers
@@ -59,7 +60,7 @@ def module_working(module):
 def word_analog(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Word Analogy", word_analog)
-    word_analogy_frame = Frame(root,bg="white")
+    word_analogy_frame = Frame(root, bg="white")
     word_analogy_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(word_analogy_frame, "white")
     a = Entry(word_analogy_frame)
@@ -75,7 +76,7 @@ def word_analog(old_frame, check_call=None):
            command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
     img = get_image("woord")
     Label(word_analogy_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.1, relwidth=0.27,
-                                                                       relheight=0.7)
+                                                                 relheight=0.7)
     root.mainloop()
 
 
@@ -88,12 +89,12 @@ def predict_word(word_analogy_frame, words):
 def odd_out(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Odd One Out", odd_out)
-    odd_out_frame = Frame(root , bg="white")
+    odd_out_frame = Frame(root, bg="white")
     odd_out_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(odd_out_frame, "white")
     sent = Entry(odd_out_frame)
     sent.place(relx=0.55, rely=0.42, relwidth=0.35, relheight=0.1)
-    submit = Button(odd_out_frame, text="Find odd word ",bg="#013A55", font="Helvetica 18 bold",
+    submit = Button(odd_out_frame, text="Find odd word ", bg="#013A55", font="Helvetica 18 bold",
                     command=lambda: odd_name(sent.get(), odd_out_frame))
     submit.place(relx=0.55, rely=0.6, relwidth=0.2, relheight=0.1)
     Button(odd_out_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
@@ -158,8 +159,9 @@ def emojipredict(old_frame, check_call=None):
            command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
 
     img = get_image("emoji")
-    Label(emoji_predict_frame, image=img , bg="white", bd=0).place(relx=0.1, rely=0.4, relwidth=0.27, relheight=0.15)
+    Label(emoji_predict_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.4, relwidth=0.27, relheight=0.15)
     root.mainloop()
+
 
 def emojipredict_image(glove_dicitionary, sent, emoji_predict_frame):
     path = emojii.pred(glove_dicitionary, sent)
@@ -171,12 +173,12 @@ def emojipredict_image(glove_dicitionary, sent, emoji_predict_frame):
 
 def newFaceRecord(old_frame):
     old_frame.destroy()
-    face_record_frame = Frame(root, bg = "white")
+    face_record_frame = Frame(root, bg="white")
     face_record_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(face_record_frame, "Face Classification")
-    Label(face_record_frame, text="Enter the Name :", fg="#738f93", font='Helvetica 22 bold') \
-        .place(relx=0.03, rely=0.2, relwidth=0.35, relheight=0.2)
-    entry = Entry(face_record_frame,font="Helvetica 30 bold ")
+    Window(face_record_frame,relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+
+    entry = Entry(face_record_frame, font="Helvetica 30 bold ")
     entry.place(relx=0.28, rely=0.2, relwidth=0.35, relheight=0.1)
     Button(face_record_frame, text="Record Face", bg="#013A55", font="Helvetica 18 bold",
            command=lambda: Face_Record.facerec(entry.get())).place(relx=0.28, rely=0.45, relwidth=0.35, relheight=0.2)
@@ -191,14 +193,13 @@ def facerecog(old_frame, check_call=None):
     new_user = ImageButton(face_recog_frame, image=get_image("facerecordnew"), second_image=get_image("facerecordnew"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=lambda: newFaceRecord(face_recog_frame))
-    new_user.place(relx=0.03, rely=0.2, relwidth=0.35, relheight=0.2)
+    new_user.place(relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
 
     new_user = ImageButton(face_recog_frame, image=get_image("facerecordold"), second_image=get_image("facerecordold"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=Face_Recognition.face_rec)
 
-    new_user.place(relx=0.03, rely=0.45, relwidth=0.35, relheight=0.2)
-
+    new_user.place(relx=0.03, rely=0.45, relwidth=0.26, relheight=0.13)
 
 
 def toolbar_and_menu(module_frame, module):
@@ -273,7 +274,7 @@ def sentiment_analysis(old_frame, check_call=None):
     sent = Entry(sentiment_analysis_frame)
     sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
     submit = Button(sentiment_analysis_frame, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_sentiment(sent.get(),sentiment_analysis_frame))
+                    command=lambda: predict_sentiment(sent.get(), sentiment_analysis_frame))
     submit.place(relx=0.4, rely=0.55, relwidth=0.15, relheight=0.1)
     Button(sentiment_analysis_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
            command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
@@ -284,10 +285,9 @@ def sentiment_analysis(old_frame, check_call=None):
     root.mainloop()
 
 
-def predict_sentiment(sent,sentiment_analysis_frame):
-    mood=sentiment.mood_analyzer(sent)
-    Label(sentiment_analysis_frame, text=mood,bg ="white").pack()
-
+def predict_sentiment(sent, sentiment_analysis_frame):
+    mood = sentiment.mood_analyzer(sent)
+    Label(sentiment_analysis_frame, text=mood, bg="white").pack()
 
 
 def titanic_survivor(old_frame, check_call=None):
@@ -387,7 +387,7 @@ def main_menu(old_frames):
 
 class ImageButton(Button):
     def __init__(self, master, second_image, image, **kw):
-        Button.__init__(self, master=master, **kw)
+        Button.__init__(self, master=master, cursor="hand2", **kw)
         self['image'] = image
         self.default_image = image
         self.second_image = second_image
@@ -399,6 +399,14 @@ class ImageButton(Button):
 
     def on_leave(self, e):
         self['image'] = self.default_image
+
+
+class Window(Frame):
+    def __init__(self, frame,relx, rely, relwidth, relheight):
+        render = get_image("enter_name")
+        img = Label(frame, image=render, bg = "white")
+        img.image = render
+        img.place(relx=relx, rely=rely,relwidth=relwidth, relheight=relheight)
 
 
 def about():
@@ -423,11 +431,16 @@ class A(threading.Thread):
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
         sys.path.insert(7, "Sentiment_Analysis/")
+<<<<<<< HEAD
         sentiment = __import__('sentiment',globals())
+=======
+
+>>>>>>> origin/master
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
+        sentiment = __import__('sentiment', globals())
         glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
         for line in glove:
             value = line.split()
@@ -458,7 +471,7 @@ if __name__ == "__main__":
 
     root = Tk()
     root.title("Fun With ML & DL")
-    root.attributes("-fullscreen", True)
+    # root.attributes("-fullscreen", True)
 
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 
