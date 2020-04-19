@@ -5,43 +5,42 @@ from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
 
 import re, string, random
+print("Hi")
+def mood_analyzer(sent):
+    print("Bye")
+    def remove_noise(tweet_tokens, stop_words=()):
+        cleaned_tokens = []
 
-def remove_noise(tweet_tokens, stop_words = ()):
+        for token, tag in pos_tag(tweet_tokens):
+            token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|' \
+                           '(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', token)
+            token = re.sub("(@[A-Za-z0-9_]+)", "", token)
 
-    cleaned_tokens = []
+            if tag.startswith("NN"):
+                pos = 'n'
+            elif tag.startswith('VB'):
+                pos = 'v'
+            else:
+                pos = 'a'
 
-    for token, tag in pos_tag(tweet_tokens):
-        token = re.sub('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|'\
-                       '(?:%[0-9a-fA-F][0-9a-fA-F]))+','', token)
-        token = re.sub("(@[A-Za-z0-9_]+)","", token)
+            lemmatizer = WordNetLemmatizer()
+            token = lemmatizer.lemmatize(token, pos)
 
-        if tag.startswith("NN"):
-            pos = 'n'
-        elif tag.startswith('VB'):
-            pos = 'v'
-        else:
-            pos = 'a'
-
-        lemmatizer = WordNetLemmatizer()
-        token = lemmatizer.lemmatize(token, pos)
-
-        if len(token) > 0 and token not in string.punctuation and token.lower() not in stop_words:
-            cleaned_tokens.append(token.lower())
-    return cleaned_tokens
-
-
-
-def get_all_words(cleaned_tokens_list):
-    for tokens in cleaned_tokens_list:
-        for token in tokens:
-            yield token
-
-def get_tweets_for_model(cleaned_tokens_list):
-    for tweet_tokens in cleaned_tokens_list:
-        yield dict([token, True] for token in tweet_tokens)
+            if len(token) > 0 and token not in string.punctuation and token.lower() not in stop_words:
+                cleaned_tokens.append(token.lower())
+        return cleaned_tokens
 
 
-if __name__ == "__main__":
+    def get_all_words(cleaned_tokens_list):
+        for tokens in cleaned_tokens_list:
+            for token in tokens:
+                yield token
+
+
+    def get_tweets_for_model(cleaned_tokens_list):
+        for tweet_tokens in cleaned_tokens_list:
+            yield dict([token, True] for token in tweet_tokens)
+
 
     positive_tweets = twitter_samples.strings('positive_tweets.json')
     negative_tweets = twitter_samples.strings('negative_tweets.json')
@@ -70,10 +69,10 @@ if __name__ == "__main__":
     negative_tokens_for_model = get_tweets_for_model(negative_cleaned_tokens_list)
 
     positive_dataset = [(tweet_dict, "Positive")
-                         for tweet_dict in positive_tokens_for_model]
+                        for tweet_dict in positive_tokens_for_model]
 
     negative_dataset = [(tweet_dict, "Negative")
-                         for tweet_dict in negative_tokens_for_model]
+                        for tweet_dict in negative_tokens_for_model]
 
     dataset = positive_dataset + negative_dataset
 
@@ -84,11 +83,9 @@ if __name__ == "__main__":
 
     classifier = NaiveBayesClassifier.train(train_data)
 
+    custom_tokens = remove_noise(word_tokenize(sent))
+    return(classifier.classify(dict([token, True] for token in custom_tokens)))
 
-custom_tweet = "I am Very sad"
-custom_tokens = remove_noise(word_tokenize(custom_tweet))
-print(custom_tweet, classifier.classify(dict([token, True] for token in custom_tokens)))
 
-    
 
-    
+
