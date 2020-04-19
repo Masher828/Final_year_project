@@ -240,7 +240,7 @@ def toolbar_and_menu(module_frame, module):
 
 
 def get_image(module):
-    im = Image.open("Files/Gui_images/" + module + ".png")
+    im = Image.open("Gui_images/" + module + ".png")
     ph = ImageTk.PhotoImage(im)
     return ph
 
