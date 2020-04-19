@@ -13,6 +13,7 @@ sys.path.insert(7, "Sentiment_Analysis/")
 sys.path.insert(8, "Titanic_Survivor/")
 
 import emojii, Flowers
+import sentiment
 
 
 def second_menu(old_frame, module, func):
@@ -60,27 +61,24 @@ def module_working(module):
 def word_analog(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Word Analogy", word_analog)
-    word_analogy_frame = Frame(root)
+    word_analogy_frame = Frame(root,bg="white")
     word_analogy_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
-    toolbar_and_menu(word_analogy_frame, "Word Analogy")
-    word_a = Label(word_analogy_frame, text="Enter word A", fg="white", bg="#013A55",
-                   font='Helvetica 10 bold')
-    word_a.place(relx=0.1, rely=0.1, relwidth=0.27, relheight=0.09)
+    toolbar_and_menu(word_analogy_frame, "white")
     a = Entry(word_analogy_frame)
-    a.place(relx=0.4, rely=0.1, relwidth=0.27, relheight=0.09)
-    word_b = Label(word_analogy_frame, text="Enter word B", fg="white", bg="#013A55",
-                   font='Helvetica 10 bold')
-    word_b.place(relx=0.1, rely=0.3, relwidth=0.27, relheight=0.09)
+    a.place(relx=0.4, rely=0.136, relwidth=0.27, relheight=0.09)
     b = Entry(word_analogy_frame)
-    b.place(relx=0.4, rely=0.3, relwidth=0.27, relheight=0.1)
-    word_c = Label(word_analogy_frame, text="Enter word C", fg="white", bg="#013A55",
-                   font='Helvetica 10 bold')
-    word_c.place(relx=0.1, rely=0.6, relwidth=0.37, relheight=0.09)
+    b.place(relx=0.4, rely=0.35, relwidth=0.27, relheight=0.1)
     c = Entry(word_analogy_frame)
-    c.place(relx=0.4, rely=0.6, relwidth=0.2, relheight=0.1)
+    c.place(relx=0.4, rely=0.586, relwidth=0.27, relheight=0.1)
     submit = Button(root, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
                     command=lambda: predict_word(word_analogy_frame, [a.get(), b.get(), c.get()]))
-    submit.place(relx=0.7, rely=0.7, relwidth=0.2, relheight=0.1)
+    submit.place(relx=0.4, rely=0.7, relwidth=0.2, relheight=0.1)
+    Button(word_analogy_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
+           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
+    img = get_image("woord")
+    Label(word_analogy_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.1, relwidth=0.27,
+                                                                       relheight=0.7)
+    root.mainloop()
 
 
 def predict_word(word_analogy_frame, words):
@@ -92,19 +90,20 @@ def predict_word(word_analogy_frame, words):
 def odd_out(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Odd One Out", odd_out)
-    odd_out_frame = Frame(root)
+    odd_out_frame = Frame(root , bg="white")
     odd_out_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
-    toolbar_and_menu(odd_out_frame, "Odd One Out")
-    label = Label(odd_out_frame, text="Enter the words seprated by comma (,) ", fg="white", bg="#013A55",
-                  font='Helvetica 10 bold')
-    label.place(relx=0.1, rely=0.1, relwidth=0.37, relheight=0.09)
+    toolbar_and_menu(odd_out_frame, "white")
     sent = Entry(odd_out_frame)
-    sent.place(relx=0.1, rely=0.3, relwidth=0.2, relheight=0.1)
-    submit = Button(odd_out_frame, text="Find odd word ", command=lambda: odd_name(sent.get(), odd_out_frame))
-    submit.place(relx=0.15, rely=0.43, relwidth=0.1, relheight=0.1)
-    main_menu = Button(odd_out_frame, text="Hello, Machine", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                       command=lambda: main_menu([odd_out_frame]))
-    main_menu.place(relx=0.29, rely=0.933, relwidth=0.24, relheight=0.05)
+    sent.place(relx=0.55, rely=0.42, relwidth=0.35, relheight=0.1)
+    submit = Button(odd_out_frame, text="Find odd word ",bg="#013A55", font="Helvetica 18 bold",
+                    command=lambda: odd_name(sent.get(), odd_out_frame))
+    submit.place(relx=0.55, rely=0.6, relwidth=0.2, relheight=0.1)
+    Button(odd_out_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
+           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
+
+    img = get_image("oddd")
+    Label(odd_out_frame, image=img, bg="white", bd=0).place(relx=0.02, rely=0.4, relwidth=0.5, relheight=0.3)
+    root.mainloop()
 
 
 def odd_name(sent, odd_out_frame):
@@ -150,26 +149,19 @@ def emojipredict(old_frame, check_call=None):
         second_menu(old_frame, "Emoji Predictor", emojipredict)
     emoji_predict_frame = Frame(root, bg="white")
     emoji_predict_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
-    Label(emoji_predict_frame, bg="#3838df", fg="white", font="Helvetica 30 bold ", anchor=W).place(relx=0,
-                                                                                                    rely=0,
-                                                                                                    relwidth=1,
-                                                                                                    relheight=0.1)
-    Label(emoji_predict_frame, text="Emoji Predictor", bg="#3838df", fg="white", font="Helvetica 30 bold ",
-          anchor=W).place(relx=0,
-                          rely=0,
-                          relwidth=1,
-                          relheight=0.1)
-    toolbar_and_menu(emoji_predict_frame, "Emoji Predictor")
-    label = Label(emoji_predict_frame, text="Enter the text here ", fg="#738f93", font='Helvetica 22 bold')
-    label.place(relx=0.01, rely=0.1, relwidth=0.2, relheight=0.1)
+    toolbar_and_menu(emoji_predict_frame, "white")
+
     sent = Entry(emoji_predict_frame)
-    sent.place(relx=0.25, rely=0.1, relwidth=0.2, relheight=0.1)
+    sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
     submit = Button(emoji_predict_frame, text="Get Emoji", bg="#013A55", font="Helvetica 18 bold",
                     command=lambda: emojipredict_image(glove_dictionary, sent.get(), emoji_predict_frame))
-    submit.place(relx=0.30, rely=0.23, relwidth=0.1, relheight=0.1)
+    submit.place(relx=0.4, rely=0.55, relwidth=0.2, relheight=0.1)
     Button(emoji_predict_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
-           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.03, relwidth=0.05, relheight=0.05)
+           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
 
+    img = get_image("emoji")
+    Label(emoji_predict_frame, image=img , bg="white", bd=0).place(relx=0.1, rely=0.4, relwidth=0.27, relheight=0.15)
+    root.mainloop()
 
 def emojipredict_image(glove_dicitionary, sent, emoji_predict_frame):
     path = emojii.pred(glove_dicitionary, sent)
@@ -240,7 +232,7 @@ def toolbar_and_menu(module_frame, module):
 
 
 def get_image(module):
-    im = Image.open("Files/Gui_images/" + module + ".png")
+    im = Image.open("Gui_images/" + module + ".png")
     ph = ImageTk.PhotoImage(im)
     return ph
 
@@ -280,10 +272,10 @@ def sentiment_analysis(old_frame, check_call=None):
     sentiment_analysis_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(sentiment_analysis_frame, "Sentiment Analysis")
 
-    comm = Entry(sentiment_analysis_frame)
-    comm.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
-    submit = Button(root, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_sentiment(sentiment_analysis_frame, [comm.get]))
+    sent = Entry(sentiment_analysis_frame)
+    sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
+    submit = Button(sentiment_analysis_frame, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
+                    command=lambda: predict_sentiment(sent.get(),sentiment_analysis_frame))
     submit.place(relx=0.4, rely=0.55, relwidth=0.15, relheight=0.1)
     Button(sentiment_analysis_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
            command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
@@ -294,7 +286,10 @@ def sentiment_analysis(old_frame, check_call=None):
     root.mainloop()
 
 
-# def predict_sentiment(sentiment_analysis_frame):
+def predict_sentiment(sent,sentiment_analysis_frame):
+    mood=sentiment.mood_analyzer(sent)
+    Label(sentiment_analysis_frame, text=mood,bg ="white").pack()
+
 
 
 def titanic_survivor(old_frame, check_call=None):
