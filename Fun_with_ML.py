@@ -9,11 +9,10 @@ from win32api import GetSystemMetrics
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
-
 sys.path.insert(8, "Titanic_Survivor/")
 
 import emojii, Flowers
-
+import Spam
 
 def second_menu(old_frame, module, func):
     old_frame.destroy()
@@ -243,10 +242,10 @@ def spam_or_ham(old_frame, check_call=None):
     spam_or_ham_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(spam_or_ham_frame, "Spam or Ham")
 
-    comm = Entry(spam_or_ham_frame)
-    comm.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
+    sent = Entry(spam_or_ham_frame)
+    sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
     submit = Button(root, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_spam(spam_or_ham_frame, [comm.get]))
+                    command=lambda: predict_spam(sent.get(), spam_or_ham_frame))
     submit.place(relx=0.4, rely=0.55, relwidth=0.2, relheight=0.1)
 
     Button(spam_or_ham_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
@@ -257,7 +256,10 @@ def spam_or_ham(old_frame, check_call=None):
     root.mainloop()
 
 
-# def predict_spam(spam_or_ham_frame):
+def predict_spam(sent,spam_or_ham_frame):
+    spamm=Spam.analyzer(sent)
+    Label(spam_or_ham_frame, text=spamm, bg="white").pack()
+
 
 def character_recognition(old_frame, check_call=None):
     if check_call is None:
@@ -431,11 +433,11 @@ class A(threading.Thread):
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
         sys.path.insert(7, "Sentiment_Analysis/")
-<<<<<<< HEAD
-        sentiment = __import__('sentiment',globals())
-=======
 
->>>>>>> origin/master
+        sentiment = __import__('sentiment',globals())
+
+
+
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
@@ -471,7 +473,7 @@ if __name__ == "__main__":
 
     root = Tk()
     root.title("Fun With ML & DL")
-    # root.attributes("-fullscreen", True)
+    root.attributes("-fullscreen", True)
 
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 
