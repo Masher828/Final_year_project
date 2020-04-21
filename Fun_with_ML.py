@@ -11,7 +11,7 @@ sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
 sys.path.insert(8, "Titanic_Survivor/")
 
-import emojii, Flowers
+import emojii , Flowers
 import Spam
 
 def second_menu(old_frame, module, func):

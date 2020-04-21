@@ -140,8 +140,8 @@ def analyzer(sent):
 
             self.prob_spam_mail, self.prob_ham_mail = self.spam_mails / self.total_mails, self.ham_mails / self.total_mails
 
-        def classify(self, processed_message, spam=0, ham=0):
-            pSpam, pHam = spam, ham
+        def classify(self, processed_message):
+            pSpam, pHam = 0,0
             for word in processed_message:
                 if word in self.prob_spam:
                     pSpam += log(self.prob_spam[word])
@@ -159,6 +159,11 @@ def analyzer(sent):
                         pHam -= log(self.ham_words + len(list(self.prob_ham.keys())))
                 pSpam += log(self.prob_spam_mail)
                 pHam += log(self.prob_ham_mail)
+
+            # if pSpam>= pHam :
+            #     return "Ham"
+            # else:
+            #     return "Spam"
             return pSpam >= pHam
 
         def predict(self, testData):
@@ -194,5 +199,10 @@ def analyzer(sent):
     sc_bow.train()
     preds_bow = sc_bow.predict(testData['message'])
     metrics(testData['label'], preds_bow)
-
-    return(sc_tf_idf.classify(sent))
+    temp = sc_tf_idf.classify(sent)
+    print(temp)
+    if temp ==0 :
+        temp = "Spam"
+    else:
+        temp = "Ham"
+    return(temp)
