@@ -98,8 +98,9 @@ def odd_out(old_frame, check_call=None):
     sent = Entry(odd_out_frame, font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
     ImageButton(odd_out_frame, image=get_gui_image("odd_word"), second_image=get_gui_image("odd_word"),
-                         bg="white", font="Helvetica 18 bold", bd =0,
-                         command=lambda: odd_name(sent.get(), odd_out_frame)).place(relx=0.31, rely=0.35, relwidth=0.19, relheight=0.1)
+                bg="white", font="Helvetica 18 bold", bd=0,
+                command=lambda: odd_name(sent.get(), odd_out_frame)).place(relx=0.31, rely=0.35, relwidth=0.19,
+                                                                           relheight=0.1)
 
 
 def odd_name(sent, odd_out_frame):
@@ -108,38 +109,48 @@ def odd_name(sent, odd_out_frame):
                                                                               relheight=0.2)
 
 
+global filename_path
+
+
 def flower_recognition(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Flower Recognition", flower_recognition)
-    flower_recognition_frame = Frame(root)
+    flower_recognition_frame = Frame(root, bg="white")
     flower_recognition_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(flower_recognition_frame, "Flower Recognition")
-    filename_pa
-    def choose():
-        filename_path = tkinter.filedialog.askopenfilename()
-    label = Label(flower_recognition_frame, text=filename_path, fg="white", bg="#013A55", font='Helvetica 10 bold')
-    label.place(relx=0.06, rely=0.06, relwidth=0.37, relheight=0.09)
 
-    submit = Button(flower_recognition_frame, text="Recognize", bg="#013A55", font="Helvetica 18 bold",
-                    command=lambda: recog_flower_name(filename_path, flower_recognition_frame))
-    submit.place(relx=0.31, rely=0.19, relwidth=0.1, relheight=0.1)
+    def choose(label):
+
+        label["text"] = tkinter.filedialog.askopenfilename()
+        #ImageLabel(flower_recognition_frame, image=get_image(label["text"]), relx=0.68, rely=0.24, relwidth=0.3, relheight=0.3)
+
+    label = Label(flower_recognition_frame, text="Path of the File", font='Helvetica 10')
+    label.place(relx=0.03, rely=0.2, relwidth=0.48, relheight=0.15)
+    chose = ImageButton(flower_recognition_frame, image=get_gui_image("choose_flower"),
+                        second_image=get_gui_image("choose_flower"), bg="white", font="Helvetica 18 bold", bd=0,
+                        command=lambda: choose(label))
+    chose.place(relx=0.03, rely=0.35, relwidth=0.19, relheight=0.1)
+
+    submit = ImageButton(flower_recognition_frame, image=get_gui_image("recognize_flower"),
+                         second_image=get_gui_image("recognize_flower"), bd=0, bg="white", font="Helvetica 18 bold",
+                         command=lambda: recog_flower_name(label["text"], flower_recognition_frame))
+    submit.place(relx=0.31, rely=0.35, relwidth=0.19, relheight=0.1)
 
 
 def recog_flower_name(filename_path, flower_recog_frame):
     path = 'Files/Image_Classification/Output/'
     flower_name = Flowers.flower_recog(filename_path)
     img = PhotoImage(file=path + flower_name + ".png")
-    data = open(path + flower_name + ".txt", encoding="utf8")
-    contents = data.read()
-    flower_recog_frame.destroy()
-    Flower_details_frame = Frame(root)
-    Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
-    toolbar_and_menu(Flower_details_frame, "Flower Recognition")
-    Label(Flower_details_frame, text=contents, fg="black", bg="#013A55", font='Helvetica 10').place(relx=0.0, rely=0.3)
-    Button(Flower_details_frame, image=img, command=lambda: main_menu([Flower_details_frame])).place(relx=0.35,
-                                                                                                     rely=0.0,
-                                                                                                     relheight=0.3)
-    root.mainloop()
+    # data = open(path + flower_name + ".txt", encoding="utf8")
+    # contents = data.read()
+    # flower_recog_frame.destroy()
+    # Flower_details_frame = Frame(root)
+    # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
+    toolbar_and_menu(flower_recog_frame, "Flower Recognition")
+    # ImageLabel(flower_recog_frame, text=contents, fg="black", bg="#013A55", font='Helvetica 10').place(relx=0.0, rely=0.3)
+    ImageLabel(flower_recog_frame, image=img, relx=0.68, rely=0.50, relwidth = 0.3, relheight=0.3)
+    Label(flower_recog_frame,text = flower_name, bg = "white").place(relx=0.68, rely=0.80, relwidth = 0.1, relheight=0.1)
+
 
 
 def emojipredict(old_frame, check_call=None):
