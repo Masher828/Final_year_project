@@ -10,9 +10,12 @@ sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(6, "Spam_or_Ham/")
 sys.path.insert(8, "Titanic_Survivor/")
+sys.path.insert(9, "Gender_Recog/")
 
 import emojii , Flowers
 import Spam
+import gender
+import titanic
 
 def second_menu(old_frame, module, func):
     old_frame.destroy()
@@ -253,24 +256,19 @@ def spam_or_ham(old_frame, check_call=None):
     spam_or_ham_frame = Frame(root, bg="white")
     spam_or_ham_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(spam_or_ham_frame, "Spam or Ham")
+    ImageLabel(spam_or_ham_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
 
-    sent = Entry(spam_or_ham_frame)
-    sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
-    submit = Button(root, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_spam(sent.get(), spam_or_ham_frame))
-    submit.place(relx=0.4, rely=0.55, relwidth=0.2, relheight=0.1)
-
-    Button(spam_or_ham_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
-           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
-
-    img = get_gui_image("submit")
-    Label(spam_or_ham_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.4, relwidth=0.27, relheight=0.15)
-    root.mainloop()
+    sent = Entry(spam_or_ham_frame,font="Helvetica 30 bold ")
+    sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
+    ImageButton(spam_or_ham_frame, image=get_gui_image("sentiment12"), second_image=get_gui_image("sentiment12"),
+                bg="white", font="Helvetica 18 bold", bd=0,
+                command=lambda: predict_spam(sent.get(), spam_or_ham_frame)).place(relx=0.31, rely=0.35, relwidth=0.19,
+                                                                           relheight=0.1)
 
 
 def predict_spam(sent,spam_or_ham_frame):
     spamm=Spam.analyzer(sent)
-    Label(spam_or_ham_frame, text=spamm, bg="white").pack()
+    Label(spam_or_ham_frame, text=spamm, bg="white",font="Helvetica 30 bold ").place(relx=0.4, rely=0.7, relwidth=0.2, relheight=0.1)
 
 
 def character_recognition(old_frame, check_call=None):
@@ -285,28 +283,83 @@ def sentiment_analysis(old_frame, check_call=None):
     sentiment_analysis_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(sentiment_analysis_frame, "Sentiment Analysis")
 
-    sent = Entry(sentiment_analysis_frame)
-    sent.place(relx=0.4, rely=0.4, relwidth=0.27, relheight=0.09)
-    submit = Button(sentiment_analysis_frame, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_sentiment(sent.get(), sentiment_analysis_frame))
-    submit.place(relx=0.4, rely=0.55, relwidth=0.15, relheight=0.1)
-    Button(sentiment_analysis_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
-           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
+    ImageLabel(sentiment_analysis_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
 
-    img = get_gui_image("submit")
-    Label(sentiment_analysis_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.4, relwidth=0.27,
-                                                                       relheight=0.15)
-    root.mainloop()
+    sent = Entry(sentiment_analysis_frame,font="Helvetica 30 bold ")
+    sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
+    ImageButton(sentiment_analysis_frame, image=get_gui_image("sentiment12"), second_image=get_gui_image("sentiment12"),
+                bg="white", font="Helvetica 18 bold", bd=0,
+                command=lambda: predict_sentiment(sent.get(), sentiment_analysis_frame)).place(relx=0.31, rely=0.35, relwidth=0.19,
+                                                                                   relheight=0.1)
 
 
 def predict_sentiment(sent, sentiment_analysis_frame):
     mood = sentiment.mood_analyzer(sent)
-    Label(sentiment_analysis_frame, text=mood, bg="white").pack()
+    Label(sentiment_analysis_frame, text=mood, bg="white",font="Helvetica 30 bold ").place(relx=0.4, rely=0.7, relwidth=0.2, relheight=0.1)
+
+def gender_recognition(old_frame, check_call=None):
+    if check_call is None:
+        second_menu(old_frame,"Gender Prediction",gender_recognition)
+    gender_recognition_frame = Frame(root, bg="white")
+    gender_recognition_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
+    toolbar_and_menu(gender_recognition_frame, "Gender Prediction")
+
+    ImageLabel(gender_recognition_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26,
+                   relheight=0.15)
+
+    sent = Entry(gender_recognition_frame, font="Helvetica 30 bold ")
+    sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
+    ImageButton(gender_recognition_frame, image=get_gui_image("sentiment12"),
+                    second_image=get_gui_image("sentiment12"),
+                    bg="white", font="Helvetica 18 bold", bd=0,
+                    command=lambda: predict_gender(sent.get(), gender_recognition_frame)).place(relx=0.31, rely=0.35,
+                                                                                                   relwidth=0.19,
+                                                                                                   relheight=0.1)
+
+
+def predict_gender(sent,gender_recognition_frame):
+    genderr = gender.analyzer(sent)
+    Label(gender_recognition_frame, text=genderr, bg="white", font="Helvetica 30 bold ").place(relx=0.4, rely=0.7,
+                                                                                            relwidth=0.2, relheight=0.1)
 
 
 def titanic_survivor(old_frame, check_call=None):
     if check_call is None:
         second_menu(old_frame, "Titanic Survivor", titanic_survivor)
+    titanic_survivor_frame= Frame(root , bg="white")
+    titanic_survivor_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
+    toolbar_and_menu(titanic_survivor_frame, "Titanic Survivor")
+    sent1 = Entry(titanic_survivor_frame)
+    sent1.place(relx=0.4, rely=0.136, relwidth=0.2, relheight=0.08)
+    sent2 = Entry(titanic_survivor_frame)
+    sent2.place(relx=0.4, rely=0.276, relwidth=0.2, relheight=0.08)
+    sent3 = Entry(titanic_survivor_frame)
+    sent3.place(relx=0.4, rely=0.396, relwidth=0.2, relheight=0.08)
+    sent4 = Entry(titanic_survivor_frame)
+    sent4.place(relx=0.4, rely=0.516, relwidth=0.2, relheight=0.08)
+    sent5 = Entry(titanic_survivor_frame)
+    sent5.place(relx=0.4, rely=0.656, relwidth=0.2, relheight=0.08)
+    sent6 = Entry(titanic_survivor_frame)
+    sent6.place(relx=0.4, rely=0.796, relwidth=0.2, relheight=0.08)
+    ImageButton(titanic_survivor_frame, image=get_gui_image("welcome_start_red"),
+                second_image=get_gui_image("welcome_start_red"),
+                bg="white", font="Helvetica 18 bold", bd=0,
+                command=lambda: predict_survivor(sent1.get(),sent2.get(),sent3.get(),sent4.get(),
+                                                 sent5.get(),sent6.get(),titanic_survivor_frame)).place(relx=0.7, rely=0.35,
+                                                                                            relwidth=0.19,
+                                                                                            relheight=0.1)
+
+
+    img = get_gui_image("titaniccc")
+    Label(titanic_survivor_frame, image=img, bg="white", bd=0).place(relx=0.07, rely=0.13, relwidth=0.27,
+                                                                 relheight=0.75)
+    root.mainloop()
+
+def predict_survivor(sent1,sent2,sent3,sent4,sent5,sent6,titanic_survivor_frame):
+    titanicc=titanic.survivor(sent1,sent2,sent3,sent4,sent5,sent6)
+    Label(titanic_survivor_frame, text=titanicc,bg="white", font="Helvetica 30 bold ").place(relx=0.7, rely=0.75,
+                                                                                            relwidth=0.19,
+                                                                                            relheight=0.1)
 
 
 def main_menu(old_frames):
@@ -383,7 +436,7 @@ def main_menu(old_frames):
     image = get_gui_image("Gender Prediction")
     description_img = get_gui_image("gender predict about")
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
-                command=lambda: gender(Menu_frame)).grid(row=2, column=3)
+                command=lambda: gender_recognition(Menu_frame)).grid(row=2, column=3)
 
     image = get_gui_image("Character Recognition")
     description_img = get_gui_image("character recog about")

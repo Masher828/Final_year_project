@@ -200,7 +200,7 @@ def analyzer(sent):
     preds_bow = sc_bow.predict(testData['message'])
     metrics(testData['label'], preds_bow)
     temp = sc_tf_idf.classify(sent)
-    print(temp)
+    #print(temp)
     if temp ==0 :
         temp = "Spam"
     else:
