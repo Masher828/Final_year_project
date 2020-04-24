@@ -5,9 +5,8 @@ from nltk.tokenize import word_tokenize
 from nltk import FreqDist, classify, NaiveBayesClassifier
 
 import re, string, random
-print("Hi")
+
 def mood_analyzer(sent):
-    print("Bye")
     def remove_noise(tweet_tokens, stop_words=()):
         cleaned_tokens = []
 
