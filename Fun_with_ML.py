@@ -2,6 +2,8 @@ import threading
 import tkinter.filedialog
 from tkinter import *
 from win10toast import ToastNotifier
+from gensim.models import KeyedVectors
+from win10toast import ToastNotifier
 import numpy as np
 from PIL import ImageTk, Image
 from win32api import GetSystemMetrics
@@ -29,36 +31,52 @@ def second_menu(old_frame, module, func):
     toolbar_and_menu(second_menu_frame, module)
     img = get_gui_image(module + " big")
 
-    Label(second_menu_frame, text=module, fg="black", bg="white", font="Helvetica 38 bold").place(relx=0.001, rely=0.17,
-                                                                                                  relwidth=0.4,
-                                                                                                  relheight=0.1)
+    ima=ImageLabel(second_menu_frame, image =img,relx=0.7, rely=0.2)
     Label(second_menu_frame, text="will add through .txt file same sa that in menu", bg="white", font="Helvetica 15",
           anchor=W).place(relx=0.013, rely=0.27, relwidth=0.5, relheight=0.2)
-    Label(second_menu_frame, image=img, bg="white").place(relx=0.8, rely=0.4, anchor=CENTER)
-
-    ImageButton(second_menu_frame, second_image=get_gui_image("welcome_start_red"),
+    Label(second_menu_frame, text=module, bg="white", font="Helvetica 25 bold").place(x=0.011, rely=0.17)
+    back=ImageButton(second_menu_frame, second_image=get_gui_image("welcome_start_red"),
                 image=get_gui_image("welcome_start_red"),
                 bg="white", bd=0,
                 command=lambda: func(second_menu_frame, 1)).place(relx=0.013, rely=0.5,
-                                                                  relwidth=0.2, relheight=0.07)
-    ImageButton(second_menu_frame, second_image=get_gui_image("about_algo"), image=get_gui_image("about_algo"),
+                                                           relwidth=0.2, relheight=0.07)
+    about_al= ImageButton(second_menu_frame, second_image=get_gui_image("about_algo"), image=get_gui_image("about_algo"),
                 bg="white",
                 bd=0,
-                command=lambda: func(second_menu_frame, 1)).place(relx=0.013, rely=0.8,
+                command=lambda: about_algo("flower_classification",ima,module_work,about_al)).place(relx=0.013, rely=0.8,
                                                                   relwidth=0.08, relheight=0.07)
-    ImageButton(second_menu_frame, second_image=get_gui_image("Working"), image=get_gui_image("Working"), bg="white",
+
+    module_work=ImageButton(second_menu_frame, second_image=get_gui_image("Working"), image=get_gui_image("Working"), bg="white",
                 bd=0,
-                command=lambda: func(second_menu_frame, 1)).place(relx=0.1, rely=0.8,
+                command=lambda: module_working(second_menu_frame,module)).place(relx=0.1, rely=0.8,
                                                                   relwidth=0.09, relheight=0.07)
     root.mainloop()
 
+def about_algo(module,module_work,about_al,old = None,frame=None):
+    path = "Files/"
+    data = open(path + module+ "/about.txt", encoding="utf8")
+    contents = data.read()
+    if not old is None:
+        old.destroy()
+    if frame is None:
+        about_algo_frame = Frame(root)
+        about_algo_frame.place(relx = 0.5, rely = 0.1,relwidth =0.5, relheight = 0.8)
+    else:
+        about_algo_frame=frame
+    label = Label(about_algo_frame,text = contents , font = "Helvetica 38 bold")
+    label.place(relx=0, rely=0)
+    module_work["command"]= module_working(module,module_work,about_al,label,about_algo_frame)
+    # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
+    root.mainloop()
 
-def about_algo(module):
-    pass
 
-
-def module_working(module):
-    pass
+def module_working(working_steps_frame, module):
+    path = "Files/"
+    data = open(path + "_".join(module.split(" ")) + "/about.txt", encoding="utf8")
+    contents = data.read()
+    label = Label(working_steps_frame, text=contents, font="Helvetica 10", justify = "left")
+    label.place(relx=0.46, rely=0.2, relwidth = 0.537, relheight =0.65)
+    
 
 
 def word_analog(old_frame, check_call=None):
@@ -66,28 +84,37 @@ def word_analog(old_frame, check_call=None):
         second_menu(old_frame, "Word Analogy", word_analog)
     word_analogy_frame = Frame(root, bg="white")
     word_analogy_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
-    toolbar_and_menu(word_analogy_frame, "white")
-    a = Entry(word_analogy_frame)
-    a.place(relx=0.4, rely=0.136, relwidth=0.27, relheight=0.09)
-    b = Entry(word_analogy_frame)
-    b.place(relx=0.4, rely=0.35, relwidth=0.27, relheight=0.1)
-    c = Entry(word_analogy_frame)
-    c.place(relx=0.4, rely=0.586, relwidth=0.27, relheight=0.1)
-    submit = Button(root, text="Predict Word", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
-                    command=lambda: predict_word(word_analogy_frame, [a.get(), b.get(), c.get()]))
-    submit.place(relx=0.4, rely=0.7, relwidth=0.2, relheight=0.1)
-    Button(word_analogy_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
-           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.01, relwidth=0.15, relheight=0.08)
-    img = get_gui_image("woord")
-    Label(word_analogy_frame, image=img, bg="white", bd=0).place(relx=0.1, rely=0.1, relwidth=0.27,
-                                                                 relheight=0.7)
-    root.mainloop()
+    toolbar_and_menu(word_analogy_frame, "Word Analogy")
+    ImageLabel(word_analogy_frame, image=get_gui_image("worda"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    a = Entry(word_analogy_frame, font="Helvetica 18 bold")
+    a.place(relx=0.3, rely=0.21, relwidth=0.17, relheight=0.09)
+    ImageLabel(word_analogy_frame, image=get_gui_image("wordb"), relx=0.5, rely=0.2, relwidth=0.26, relheight=0.15)
+    b = Entry(word_analogy_frame, font="Helvetica 18 bold")
+    b.place(relx=0.77, rely=0.21, relwidth=0.17, relheight=0.1)
+    ImageLabel(word_analogy_frame, image=get_gui_image("wordc"), relx=0.03, rely=0.4, relwidth=0.26, relheight=0.15)
+    c = Entry(word_analogy_frame, font="Helvetica 18 bold")
+    c.place(relx=0.3, rely=0.41, relwidth=0.17, relheight=0.09)
+    ImageButton(root, image=get_gui_image("predict_word"), second_image=get_gui_image("predict_word"), bg="white",
+                 bd=0,
+                command=lambda: predict_word(word_analogy_frame, [a.get(), b.get(), c.get()])).place(relx=0.03,
+                                                                                                     rely=0.61,
+                                                                                                     relwidth=0.2,
+                                                                                                     relheight=0.1)
 
 
 def predict_word(word_analogy_frame, words):
-    odd = word_analogy.word_analogyy(glove_dictionary, words)
-    Button(word_analogy_frame, text=odd, command=lambda: main_menu([frame])).place(relx=0.7, rely=0.5, relwidth=0.2,
-                                                                                   relheight=0.2)
+    try :
+
+        print(type(word_vector))
+        odd = word_analogy.word_analogyy(word_vector, words)
+        print("hi")
+    except :
+
+        print(type(glove_dictionary))
+        odd = word_analogy.word_analogyy(glove_dictionary, words)
+        print("tata")
+    ImageLabel(word_analogy_frame, image=get_gui_image("wordd"), relx=0.5, rely=0.41, relwidth=0.26, relheight=0.15)
+    Label(word_analogy_frame, text = odd, font="Helvetica 18 bold").place(relx=0.77, rely=0.2, relwidth=0.26, relheight=0.15)
 
 
 def odd_out(old_frame, check_call=None):
@@ -116,15 +143,15 @@ global filename_path
 
 def flower_recognition(old_frame, check_call=None):
     if check_call is None:
+        print("hello")
         second_menu(old_frame, "Flower Recognition", flower_recognition)
     flower_recognition_frame = Frame(root, bg="white")
     flower_recognition_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(flower_recognition_frame, "Flower Recognition")
 
     def choose(label):
-
         label["text"] = tkinter.filedialog.askopenfilename()
-        #ImageLabel(flower_recognition_frame, image=get_image(label["text"]), relx=0.68, rely=0.24, relwidth=0.3, relheight=0.3)
+        # ImageLabel(flower_recognition_frame, image=get_image(label["text"]), relx=0.68, rely=0.24, relwidth=0.3, relheight=0.3)
 
     label = Label(flower_recognition_frame, text="Path of the File", font='Helvetica 10')
     label.place(relx=0.03, rely=0.2, relwidth=0.48, relheight=0.15)
@@ -150,9 +177,8 @@ def recog_flower_name(filename_path, flower_recog_frame):
     # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
     toolbar_and_menu(flower_recog_frame, "Flower Recognition")
     # ImageLabel(flower_recog_frame, text=contents, fg="black", bg="#013A55", font='Helvetica 10').place(relx=0.0, rely=0.3)
-    ImageLabel(flower_recog_frame, image=img, relx=0.68, rely=0.50, relwidth = 0.3, relheight=0.3)
-    Label(flower_recog_frame,text = flower_name, bg = "white").place(relx=0.68, rely=0.80, relwidth = 0.1, relheight=0.1)
-
+    ImageLabel(flower_recog_frame, image=img, relx=0.68, rely=0.50, relwidth=0.3, relheight=0.3)
+    Label(flower_recog_frame, text=flower_name, bg="white").place(relx=0.68, rely=0.80, relwidth=0.1, relheight=0.1)
 
 
 def emojipredict(old_frame, check_call=None):
@@ -180,7 +206,7 @@ def newFaceRecord(old_frame):
     face_record_frame = Frame(root, bg="white")
     face_record_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(face_record_frame, "Face Classification")
-    ImageLabel(face_record_frame, image_path="enter_name", relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(face_record_frame, image=get_gui_image("enter_name"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
 
     entry = Entry(face_record_frame, font="Helvetica 30 bold ")
     entry.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
@@ -200,14 +226,14 @@ def facerecog(old_frame, check_call=None):
                            second_image=get_gui_image("facerecordnew"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=lambda: newFaceRecord(face_recog_frame))
-    new_user.place(relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    new_user.place(relx=0.03, rely=0.2)
 
     new_user = ImageButton(face_recog_frame, image=get_gui_image("facerecordold"),
                            second_image=get_gui_image("facerecordold"),
                            bg="white", font="Helvetica 18 bold", bd=0,
                            command=Face_Recognition.face_rec)
 
-    new_user.place(relx=0.03, rely=0.45, relwidth=0.26, relheight=0.13)
+    new_user.place(relx=0.03, rely=0.45)
 
 
 def toolbar_and_menu(module_frame, module):
@@ -217,9 +243,7 @@ def toolbar_and_menu(module_frame, module):
                                                                                              relheight=0.1)
     Label(module_frame, text=module, bg="#3838df", fg="white", font="Helvetica 30 bold ",
           anchor=W).place(relx=0,
-                          rely=0,
-                          relwidth=1,
-                          relheight=0.1)
+                          rely=0)
     cross = get_gui_image("close_red_blue")
     cross2 = get_gui_image("close_red_blue_cross")
     mini = get_gui_image("mini_yellow_blue")
@@ -228,14 +252,12 @@ def toolbar_and_menu(module_frame, module):
 
     ImageButton(module_frame, image=cross, second_image=cross2, command=close, border="0", bg=bg,
                 bd="0").place(relx=0.982,
-                              rely=0,
-                              relwidth=0.02,
-                              relheight=0.03)
+                              rely=0)
     ImageButton(module_frame, image=mini, second_image=mini2, command=minimize, border="0", bg=bg,
                 bd="0").place(
-        relx=0.962, rely=0, relwidth=0.018, relheight=0.03)
-    Button(module_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold",
-           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.03, relwidth=0.05, relheight=0.05)
+        relx=0.962, rely=0)
+    Button(module_frame, text="Menu", bd=0, bg="#3838df", fg="white", font="Helvetica 18 bold", cursor = "hand2",
+           command=lambda: main_menu([frame])).place(relx=0.8, rely=0.03)
 
 
 def get_gui_image(module):
@@ -469,11 +491,11 @@ class ImageButton(Button):
 
 
 class ImageLabel(Frame):
-    def __init__(self, frame, image, relx, rely, relwidth, relheight):
+    def __init__(self, frame, image, relx, rely):
         # render = get_gui_image(image_path)
         img = Label(frame, image=image, bg="white")
         img.image = image
-        img.place(relx=relx, rely=rely, relwidth=relwidth, relheight=relheight)
+        img.place(relx=relx, rely=rely)
 
 
 def about():
@@ -493,6 +515,7 @@ def about():
 
 class A(threading.Thread):
     def run(self):
+        toaster = ToastNotifier()
         global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment
         sys.path.insert(1, "Face_Recog/")
         sys.path.insert(4, "odd_one_out/")
@@ -514,10 +537,14 @@ class A(threading.Thread):
             word = value[0]
             coefficient = np.asarray(value[1:], dtype=float)
             glove_dictionary[word] = coefficient
-        # word_vector = KeyedVectors.load_word2vec_format(
-        #     "odd_one_out/Files/GoogleNews-vectors-negative300.bin", binary=True)
-        # toaster.show_toast("Odd One Out and Word Analogy is ready to run")
-
+        print(0)
+        toaster.show_toast("Odd One Out is ready to run")
+        print(1)
+        global word_vector
+        word_vector = KeyedVectors.load_word2vec_format(
+            "Files/odd_one_out/GoogleNews-vectors-negative300.bin", binary=True)
+        toaster.show_toast("Odd One Out and Word Analogy is ready to run")
+        print(2)
 
 def close():
     sys.exit(0)
@@ -531,14 +558,18 @@ if __name__ == "__main__":
     obj = A()
     obj.start()
     glove_dictionary = {}
-    word_vector = {}
 
     # word_vector = KeyedVectors.load_word2vec_format(
     #     " G:\Project\Fun With ML\Code\odd_one_out\Files\GoogleNews-vectors-negative300.bin", binary=True)
 
     root = Tk()
     root.title("Fun With ML & DL")
+
     root.attributes("-fullscreen", True)
+
+    # root.attributes("-fullscreen", True)
+    # root.attributes("-alpha", 0.55)
+
 
     root.geometry("{0}x{1}+0+0".format(root.winfo_screenwidth(), root.winfo_screenheight()))
 

@@ -8,7 +8,7 @@ import cv2
 
 
 def flower_recog(flower_path):
-    path = "Files/Flower_Classification/"
+    path = "Files/Flower_Recognition/"
     generator = image.ImageDataGenerator(horizontal_flip=True, shear_range=0.2, rotation_range=10)
     gen = generator.flow_from_directory(path + "Flowers")
     num_to_flower = {}
