@@ -1,18 +1,18 @@
 import numpy as np
 import cv2
 from sklearn.neighbors import KNeighborsClassifier
+path = "Files/Face_Classification/"
+Face_Record = np.load(path + "Face_Data.npy")
 
+# classifier=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+classifier = cv2.CascadeClassifier(path + "haarcascade_frontalface_default.xml")
+cap = cv2.VideoCapture(0)
+
+model = KNeighborsClassifier(10)
+model.fit(Face_Record[:, 1:], Face_Record[:, 0])
 
 def face_rec():
-    path = "Files/Face_Recognition/"
-    Face_Record = np.load(path + "Face_Data.npy")
 
-    # classifier=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-    classifier = cv2.CascadeClassifier(path + "haarcascade_frontalface_default.xml")
-    cap = cv2.VideoCapture(0)
-
-    model = KNeighborsClassifier(10)
-    model.fit(Face_Record[:, 1:], Face_Record[:, 0])
 
     while True:
         areas = []

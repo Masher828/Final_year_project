@@ -10,14 +10,9 @@ from win32api import GetSystemMetrics
 
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
-sys.path.insert(6, "Spam_or_Ham/")
-sys.path.insert(8, "Titanic_Survivor/")
 sys.path.insert(9, "Gender_Recog/")
 
-import emojii , Flowers
-import Spam
-import gender
-import titanic
+import emojii , Flowers, gender
 
 def second_menu(old_frame, module, func):
     old_frame.destroy()
@@ -35,6 +30,10 @@ def second_menu(old_frame, module, func):
     Label(second_menu_frame, text="will add through .txt file same sa that in menu", bg="white", font="Helvetica 15",
           anchor=W).place(relx=0.013, rely=0.27, relwidth=0.5, relheight=0.2)
     Label(second_menu_frame, text=module, bg="white", font="Helvetica 25 bold").place(x=0.011, rely=0.17)
+    contents=""
+    label = Label(second_menu_frame, text=contents, font="Helvetica 10", justify="left")
+    label.place(relx=0.46, rely=0.2)
+
     back=ImageButton(second_menu_frame, second_image=get_gui_image("welcome_start_red"),
                 image=get_gui_image("welcome_start_red"),
                 bg="white", bd=0,
@@ -43,39 +42,31 @@ def second_menu(old_frame, module, func):
     about_al= ImageButton(second_menu_frame, second_image=get_gui_image("about_algo"), image=get_gui_image("about_algo"),
                 bg="white",
                 bd=0,
-                command=lambda: about_algo("flower_classification",ima,module_work,about_al)).place(relx=0.013, rely=0.8,
+                command=lambda: about_algo(module,label,ima)).place(relx=0.013, rely=0.8,
                                                                   relwidth=0.08, relheight=0.07)
 
     module_work=ImageButton(second_menu_frame, second_image=get_gui_image("Working"), image=get_gui_image("Working"), bg="white",
                 bd=0,
-                command=lambda: module_working(second_menu_frame,module)).place(relx=0.1, rely=0.8,
+                command=lambda: module_working(module,label,ima)).place(relx=0.1, rely=0.8,
                                                                   relwidth=0.09, relheight=0.07)
     root.mainloop()
 
-def about_algo(module,module_work,about_al,old = None,frame=None):
-    path = "Files/"
-    data = open(path + module+ "/about.txt", encoding="utf8")
-    contents = data.read()
-    if not old is None:
-        old.destroy()
-    if frame is None:
-        about_algo_frame = Frame(root)
-        about_algo_frame.place(relx = 0.5, rely = 0.1,relwidth =0.5, relheight = 0.8)
-    else:
-        about_algo_frame=frame
-    label = Label(about_algo_frame,text = contents , font = "Helvetica 38 bold")
-    label.place(relx=0, rely=0)
-    module_work["command"]= module_working(module,module_work,about_al,label,about_algo_frame)
-    # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
-    root.mainloop()
-
-
-def module_working(working_steps_frame, module):
+def about_algo(module,label,ima):
     path = "Files/"
     data = open(path + "_".join(module.split(" ")) + "/about.txt", encoding="utf8")
     contents = data.read()
-    label = Label(working_steps_frame, text=contents, font="Helvetica 10", justify = "left")
-    label.place(relx=0.46, rely=0.2, relwidth = 0.537, relheight =0.65)
+    label["text"]=contents
+    ima.Destroy()
+
+
+
+
+def module_working( module,label,ima):
+    path = "Files/"
+    data = open(path + "_".join(module.split(" ")) + "/steps.txt", encoding="utf8")
+    contents = data.read()
+    label["text"]=contents
+    ima.Destroy()
     
 
 
@@ -85,13 +76,13 @@ def word_analog(old_frame, check_call=None):
     word_analogy_frame = Frame(root, bg="white")
     word_analogy_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(word_analogy_frame, "Word Analogy")
-    ImageLabel(word_analogy_frame, image=get_gui_image("worda"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(word_analogy_frame, image=get_gui_image("worda"), relx=0.03, rely=0.2)
     a = Entry(word_analogy_frame, font="Helvetica 18 bold")
     a.place(relx=0.3, rely=0.21, relwidth=0.17, relheight=0.09)
-    ImageLabel(word_analogy_frame, image=get_gui_image("wordb"), relx=0.5, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(word_analogy_frame, image=get_gui_image("wordb"), relx=0.5, rely=0.2)
     b = Entry(word_analogy_frame, font="Helvetica 18 bold")
     b.place(relx=0.77, rely=0.21, relwidth=0.17, relheight=0.1)
-    ImageLabel(word_analogy_frame, image=get_gui_image("wordc"), relx=0.03, rely=0.4, relwidth=0.26, relheight=0.15)
+    ImageLabel(word_analogy_frame, image=get_gui_image("wordc"), relx=0.03, rely=0.4)
     c = Entry(word_analogy_frame, font="Helvetica 18 bold")
     c.place(relx=0.3, rely=0.41, relwidth=0.17, relheight=0.09)
     ImageButton(root, image=get_gui_image("predict_word"), second_image=get_gui_image("predict_word"), bg="white",
@@ -177,7 +168,7 @@ def recog_flower_name(filename_path, flower_recog_frame):
     # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
     toolbar_and_menu(flower_recog_frame, "Flower Recognition")
     # ImageLabel(flower_recog_frame, text=contents, fg="black", bg="#013A55", font='Helvetica 10').place(relx=0.0, rely=0.3)
-    ImageLabel(flower_recog_frame, image=img, relx=0.68, rely=0.50, relwidth=0.3, relheight=0.3)
+    ImageLabel(flower_recog_frame, image=img, relx=0.68, rely=0.50)
     Label(flower_recog_frame, text=flower_name, bg="white").place(relx=0.68, rely=0.80, relwidth=0.1, relheight=0.1)
 
 
@@ -187,7 +178,7 @@ def emojipredict(old_frame, check_call=None):
     emoji_predict_frame = Frame(root, bg="white")
     emoji_predict_frame.place(relx=0.0, rely=0.0, relwidth=1, relheight=1)
     toolbar_and_menu(emoji_predict_frame, "Emoji Predictor")
-    ImageLabel(emoji_predict_frame, image=get_gui_image("emoji"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(emoji_predict_frame, image=get_gui_image("emoji"), relx=0.03, rely=0.2)
     sent = Entry(emoji_predict_frame, font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
     submit = ImageButton(emoji_predict_frame, image=get_gui_image("get_emoji"), second_image=get_gui_image("get_emoji"),
@@ -198,7 +189,7 @@ def emojipredict(old_frame, check_call=None):
 
 def emojipredict_image(glove_dicitionary, sent, emoji_predict_frame):
     path = emojii.pred(glove_dicitionary, sent)
-    ImageLabel(emoji_predict_frame, image=get_image(path), relx=0.75, rely=0.45, relheight=0.30, relwidth=0.2)
+    ImageLabel(emoji_predict_frame, image=get_image(path), relx=0.75, rely=0.45)
 
 
 def newFaceRecord(old_frame):
@@ -278,7 +269,7 @@ def spam_or_ham(old_frame, check_call=None):
     spam_or_ham_frame = Frame(root, bg="white")
     spam_or_ham_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(spam_or_ham_frame, "Spam or Ham")
-    ImageLabel(spam_or_ham_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(spam_or_ham_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2)
 
     sent = Entry(spam_or_ham_frame,font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
@@ -305,7 +296,7 @@ def sentiment_analysis(old_frame, check_call=None):
     sentiment_analysis_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(sentiment_analysis_frame, "Sentiment Analysis")
 
-    ImageLabel(sentiment_analysis_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26, relheight=0.15)
+    ImageLabel(sentiment_analysis_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2)
 
     sent = Entry(sentiment_analysis_frame,font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
@@ -326,8 +317,7 @@ def gender_recognition(old_frame, check_call=None):
     gender_recognition_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(gender_recognition_frame, "Gender Prediction")
 
-    ImageLabel(gender_recognition_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26,
-                   relheight=0.15)
+    ImageLabel(gender_recognition_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2)
 
     sent = Entry(gender_recognition_frame, font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
@@ -378,7 +368,7 @@ def titanic_survivor(old_frame, check_call=None):
     root.mainloop()
 
 def predict_survivor(sent1,sent2,sent3,sent4,sent5,sent6,titanic_survivor_frame):
-    titanicc=titanic.survivor(sent1,sent2,sent3,sent4,sent5,sent6)
+    titanicc=Titanic.survivor(sent1,sent2,sent3,sent4,sent5,sent6)
     Label(titanic_survivor_frame, text=titanicc,bg="white", font="Helvetica 30 bold ").place(relx=0.7, rely=0.75,
                                                                                             relwidth=0.19,
                                                                                             relheight=0.1)
@@ -493,9 +483,12 @@ class ImageButton(Button):
 class ImageLabel(Frame):
     def __init__(self, frame, image, relx, rely):
         # render = get_gui_image(image_path)
-        img = Label(frame, image=image, bg="white")
-        img.image = image
-        img.place(relx=relx, rely=rely)
+        self.img = Label(frame, image=image, bg="white")
+        self.img.image = image
+        self.img.place(relx=relx, rely=rely)
+
+    def Destroy(self):
+        self.img.destroy()
 
 
 def about():
@@ -516,35 +509,34 @@ def about():
 class A(threading.Thread):
     def run(self):
         toaster = ToastNotifier()
-        global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment
+        global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
         sys.path.insert(1, "Face_Recog/")
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
         sys.path.insert(7, "Sentiment_Analysis/")
+        #sys.path.insert(8, "Titanic_Survivor/")
 
         sentiment = __import__('sentiment',globals())
+        sys.path.insert(6, "Spam_or_Ham/")
 
-
-
+        #Titanic = __import__('Titanic', globals())
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
         sentiment = __import__('sentiment', globals())
+        Spam = __import__('Spam', globals())
         glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
         for line in glove:
             value = line.split()
             word = value[0]
             coefficient = np.asarray(value[1:], dtype=float)
             glove_dictionary[word] = coefficient
-        print(0)
         toaster.show_toast("Odd One Out is ready to run")
-        print(1)
         global word_vector
         word_vector = KeyedVectors.load_word2vec_format(
-            "Files/odd_one_out/GoogleNews-vectors-negative300.bin", binary=True)
+            "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
         toaster.show_toast("Odd One Out and Word Analogy is ready to run")
-        print(2)
 
 def close():
     sys.exit(0)
