@@ -1,0 +1,31 @@
+This model is based on the Deep Learning 
+Deep learning is an artificial intelligence function that imitates the workings of the human brain in processing data and
+creating patterns for use in decision making. Deep learning is a subset of machine learning in artificial intelligence (AI)
+that has 
+networks capable of learning unsupervised from data that is unstructured or unlabeled. Also known as deep neural learning 
+or deep neural network.
+Andrew Ng from Coursera and Chief Scientist at Baidu Research formally founded Google Brain that eventually resulted in 
+the productization of deep learning technologies across a large number of Google services.
+In early talks on deep learning, Andrew described deep learning in the context of traditional artificial neural networks.
+ In the 2013 talk titled “Deep Learning, 
+Self-Taught Learning and Unsupervised Feature Learning” he described the idea of deep learning as:
+
+Using brain simulations, hope to:
+
+– Make learning algorithms much better and easier to use.
+
+– Make revolutionary advances in machine learning and AI.
+
+I believe this is our best shot at progress towards real AI
+
+Flower Recognition uses Convolution Neural Network.
+Convolutional Neural Networks (CNN) are everywhere. It is arguably the most popular deep learning architecture. The recent 
+surge of interest in deep learning is due to the immense popularity and effectiveness of convnets. The interest in CNN 
+started with AlexNet in 2012 and it has grown exponentially ever since. In just three years, researchers progressed from 8
+layer AlexNet to 152 layer ResNet.
+CNN is now the go-to model on every image related problem. In terms of accuracy they blow competition out of the water. 
+It is also successfully applied to recommender systems, natural language processing and more. The main advantage of CNN 
+compared to its predecessors is that it automatically detects the important features without any human supervision. 
+For example, given many pictures of cats and dogs it learns distinctive features for each class by itself.
+CNN is also computationally efficient. It uses special convolution and pooling operations and performs parameter sharing.
+ This enables CNN models to run on any device, making them universally attractive.

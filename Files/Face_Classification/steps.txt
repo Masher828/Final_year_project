@@ -1,0 +1,16 @@
+Wonder how this module works??
+Step 1 : Firstly we have to record the face of the user
+    step 1.1 : For recording the face first we have to detect the face in the image
+    step 1.2 : we can get the image by uploading photo to computer or we can use the web cam to capture frame of a video
+    step 1.3 : we are using Haar cascades which was proposed by Paul Viola and Michael Jones in their paper Rapid Obejct 
+               Detection using a boosted cascade of simple Features
+    step 1.4 : Here we are using Haar Cascade Frontal Face Classifier to detect the face in the image.
+    step 1.5 : Now we will do some preprocessing on the image.
+    step 1.5 : We will store some samples of faces with the name of the person.
+
+Step 2 : Now, we have to classify the face based on the pre-recorded faces
+    step 2.1 Here we will load the faces into the ram
+    step 2.2 Now we will use K-NN to classify the faces according to the features.
+    step 2.3 upload image to the ram or take a frame of video captured by the front camera.
+    step 2.4 now we will check to which cluster the face of the user belongs.
+    step 2.5 Once the cluster is found we will return the name of the user. 
