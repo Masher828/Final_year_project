@@ -1,0 +1,26 @@
+Machine learning is a method of data analysis that automates analytical model building. It is a branch of artificial
+intelligence based on the idea that systems can learn from data, identify patterns and make decisions with minimal human
+intervention.Machine learning is the science of getting computers to act without being explicitly programmed. In the past
+decade, machine learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly
+improved understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times
+a day without knowing it.
+Machine learning is the science of getting computers to act without being explicitly programmed. In the past decade, 
+machine
+learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly improved 
+understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times a day 
+without knowing it.
+
+Word embedding
+In this algorithm we will create or use already built dataset in which each word is mapped with some n-dimensional vector
+which is useful for distinguishing every word from each other.We have created vector because computer cannot understand 
+word but instead it can understand number wo we will use vectors to differentiate each word.
+we can create our own dataset if we have certain limits in the words but if we dont have any idea which word can come so 
+better to use pre built dataset as it might be slow but higher accuracy than our dataset.
+Google word to vect is a dataset created specifically for word embedding as powerfull deep learning model cannot understand
+string in it's raw form without converting it to vector.
+
+Cosine Similarity
+it is the mathematical expresion that we will be using to predict the word D as we have created the vector of each word and
+with vector we can find the cos of angle between two vectors (i.e. two words) and with this we can relate how similar those
+2 words are. If the cos of angle between them is 0 the n both are different otherwise and if it is 1 then both words are 
+very much similar or same.

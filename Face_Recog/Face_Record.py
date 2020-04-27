@@ -9,14 +9,14 @@ from tkinter import *
 
 # Haarcascade Classifier for frontal face which will detect your face and gives the (x,y) coordinates along with
 # Height and width of your face from the input image
-
-def facerec(name):
-    path = "Files/Face_Recognition/"
-    classifier = cv2.CascadeClassifier(path + "haarcascade_frontalface_default.xml")
+path = "Files/Face_Recognition/"
+classifier = cv2.CascadeClassifier(path + "haarcascade_frontalface_default.xml")
 
     # Initialize the front camera of your laptop as 0 stands for inbuilt camera and it will start recording
-    cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
+
+def facerec(name):
     face_list = []
     count = 50
     while count:

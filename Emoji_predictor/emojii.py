@@ -6,7 +6,7 @@ from keras.layers import Dense, Dropout, LSTM, Activation
 
 def pred(glove_dictionary, sent):
     path = "Files/Emoji_Predictor/"
-    emoji_to_image = {"0": 'Emoticons/heart.png',
+    emoji_to_image = {"0": 'Emoticons/heart.png ',
                       "1": "Emoticons/Baseball.png",
                       "2": "Emoticons/smile.png",
                       "3": 'Emoticons/sad.png',

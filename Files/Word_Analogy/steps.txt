@@ -1,0 +1,10 @@
+Wonder how this works ?
+Step 1 : download the google word 2 vec.
+Step 2 : Create dictionary of the word 2 vec such that each word is mapped with it's corresponding vector.
+Step 2 : get the list of words from the user in the form of (A,B,C  i.e.  A->B || C->? )
+Step 3 : find the vector of A,B,C 
+Step 4 : now iterate over the disctionary and find the maximum cosine similarity between 
+         ((word_vector(A)-word_vector(B), word_vector(C)-word_vector(dict_word))
+Step 5 : word with maximum cosine similarity is the required word.
+Note : It takes a lot of time to run until your computer is a supercomputer as it has to iterate over the whole 1.5gb 
+       dataset along with computation of 300 columns at each row of dataset.

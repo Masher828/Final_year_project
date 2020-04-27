@@ -5,8 +5,11 @@ from keras.models import Sequential
 from keras.layers import Dense,LSTM,Dropout
 from sklearn.model_selection import train_test_split
 
+
 dataM = pd.read_csv("Files/Gender_Recog/Dataset/Female-Names.csv")
 dataF = pd.read_csv("Files/Gender_Recog/Dataset/Male-Names.csv")
+
+
 
 df = pd.concat([dataM,dataF])
 
@@ -86,6 +89,7 @@ model.load_weights("Files/Gender_Recog/model.hdf5")
 X_train, X_test, y_train, y_test = train_test_split(words,labels_one_hot , test_size=0.33, random_state=42)
 
 #model.fit(X_train,y_train,epochs=5)
+model.load_weights("Files/Gender_Recog/model.hdf5")
 #model.evaluate(X_test,y_test)
 def word2vec(urname):
   char_set = [' ', '.', '1', '0', '3', '2', '5', '4', '7', '6', '9', '8', 'END', 'a', 'c', 'b', 'e', 'd', 'g', 'f', 'i',
@@ -121,6 +125,7 @@ def analyzer(sent):
   cleaned_mat = cleaned_mat.reshape(1, 20, 39)
   model.predict(cleaned_mat)
   npp = np.argmax(model.predict(cleaned_mat))
+  model.save_weights("Files/Gender_Recog/model.hdf5")
   if npp == 0:
     npp = "Female"
   else:

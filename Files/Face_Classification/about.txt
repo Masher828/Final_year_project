@@ -1,0 +1,22 @@
+Machine learning is a method of data analysis that automates analytical model building. It is a branch of artificial
+intelligence based on the idea that systems can learn from data, identify patterns and make decisions with minimal human
+intervention.Machine learning is the science of getting computers to act without being explicitly programmed. In the past
+decade, machine learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly
+improved understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times
+a day without knowing it.
+Machine learning is the science of getting computers to act without being explicitly programmed. In the past decade, 
+machine
+learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly improved 
+understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times a day 
+without knowing it.
+
+K- Nearest Neighbors
+A supervised machine learning algorithm (as opposed to an unsupervised machine learning algorithm) is one that relies on 
+labeled input data to learn a function that produces an appropriate output when given new unlabeled data.
+Imagine a computer is a child, we are its supervisor (e.g. parent, guardian, or teacher), and we want the child (computer) 
+to learn what a pig looks like. We will show the child several different pictures, some of which are pigs and the rest could 
+be pictures of anything (cats, dogs, etc).
+Supervised machine learning algorithms are used to solve classification or regression problems.
+A classification problem has a discrete value as its output. For example, “likes pineapple on pizza” and “does not like 
+pineapple on pizza” are discrete. There is no middle ground. The analogy above of teaching a child to identify a pig is 
+another example of a classification problem

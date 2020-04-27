@@ -1,0 +1,9 @@
+Wonder how this models work ??
+Step 1 : download the word vector either glove vector or google word to vec.
+step 2 : create the dictionary of all the words in the word vector such that every word is matched with it's vector.
+Step 3 : Now get the list of words in which we have to find odd one
+Step 4 : After this we will iterate through the the word vector dictionary created at step 2.
+Step 5 : now we will get all the vectors of the words.
+Step 6 : store the avg of vector of words.
+Step 7 : Now find the cosine similarity of each words entered by user with the average vectors.
+Step 8 : Word with the lowest similarity is the odd word 

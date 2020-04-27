@@ -1,0 +1,20 @@
+Steps to construct a model to recognize Flowers
+Step 1  : Initially, we should find a dataset of different flowers to train our model.
+Step 2  : Dataset can be found on the kaggle and other similar websites.
+Step 3  : Now we have to load all the images of flowers with their name.
+Step 4  : After this we will create a architecture for model.
+Step 5  : Architecture is hit and try method we have to change the epochs (number of training cycles) and architecture.
+Step 6  : We can also change the number of neurons in a layer or the learning rate of the model so that we get a good 
+          accuracy.
+Step 7  : We can also use the concept of transer learning and use the pre-build model which also have been used in the 
+          competition.
+Step 8  : Some example of famous architecture are Imagenet, Vgg etc.
+Step 9  : what we mean by training our model is that it has some number of parameters and it's value gets changed on each
+          epoch and accuracy also increaes.
+Step 10 : We also have to make sure that the number of epochs is not too large as if it is large we will end up overfitting
+          our model.
+Step 11 : Overfitting means that our model will work on our dataset but any image outside the dataset will not be recognized
+          properly.
+Step 12 : Opposite of Overfitting is Underfitting in this our model cannot even recognize the images of the dataset on which 
+          it is trained.
+Step 13 : Once the model is trained we can upload the picture to ram and make prediction about the flower.
