@@ -6,7 +6,7 @@ from keras.layers import Dense,LSTM,Dropout
 from sklearn.model_selection import train_test_split
 
 dataM = pd.read_csv("Files/Gender_Recog/Dataset/Female-Names.csv")
-dataF = pd.read_csv("Files/Gender_Recog/Dataset//Male-Names.csv")
+dataF = pd.read_csv("Files/Gender_Recog/Dataset/Male-Names.csv")
 
 df = pd.concat([dataM,dataF])
 
@@ -81,6 +81,7 @@ model.add(Dense(2,activation='softmax'))
 #model.summary()
 
 model.compile(optimizer="adam",loss="categorical_crossentropy",metrics=["accuracy"])
+model.load_weights("Files/Gender_Recog/model.hdf5")
 
 X_train, X_test, y_train, y_test = train_test_split(words,labels_one_hot , test_size=0.33, random_state=42)
 

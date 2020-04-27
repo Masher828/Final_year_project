@@ -38,8 +38,7 @@ def second_menu(old_frame, module, func):
     back=ImageButton(second_menu_frame, second_image=get_gui_image("welcome_start_red"),
                 image=get_gui_image("welcome_start_red"),
                 bg="white", bd=0,
-                command=lambda: func(second_menu_frame, 1)).place(relx=0.013, rely=0.5,
-                                                           relwidth=0.2, relheight=0.07)
+                command=lambda: func(second_menu_frame, 1)).place(relx=0.013, rely=0.5,relwidth=0.2, relheight=0.07)
     about_al= ImageButton(second_menu_frame, second_image=get_gui_image("about_algo"), image=get_gui_image("about_algo"),
                 bg="white",
                 bd=0,
@@ -63,7 +62,7 @@ def about_algo(module,module_work,about_al,old = None,frame=None):
         about_algo_frame.place(relx = 0.5, rely = 0.1,relwidth =0.5, relheight = 0.8)
     else:
         about_algo_frame=frame
-    label = Label(about_algo_frame,text = contents , font = "Helvetica 38 bold")
+    label = Label(about_algo_frame,text = contents , font = "Helvetica 10")
     label.place(relx=0, rely=0)
     module_work["command"]= module_working(module,module_work,about_al,label,about_algo_frame)
     # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
@@ -326,8 +325,7 @@ def gender_recognition(old_frame, check_call=None):
     gender_recognition_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
     toolbar_and_menu(gender_recognition_frame, "Gender Prediction")
 
-    ImageLabel(gender_recognition_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2, relwidth=0.26,
-                   relheight=0.15)
+    ImageLabel(gender_recognition_frame, image=get_gui_image("submit"), relx=0.03, rely=0.2)
 
     sent = Entry(gender_recognition_frame, font="Helvetica 30 bold ")
     sent.place(relx=0.31, rely=0.21, relwidth=0.35, relheight=0.1)
