@@ -16,8 +16,12 @@ sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(9, "Gender_Recog/")
 sys.path.insert(7, "Sentiment_Analysis/")
+sys.path.insert(10, "Sudoku_Solver/")
 
 import emojii , Flowers, gender , sentiment
+
+import emojii , Flowers, gender
+import sudo
 
 def second_menu(old_frame, module, func):
     old_frame.destroy()
@@ -123,21 +127,7 @@ def about_algo(module,label,ima):
     path = "Files/"
     data = open(path + "_".join(module.split(" ")) + "/about.txt", encoding="utf8")
     contents = data.read()
-
-    if not old is None:
-        old.destroy()
-    if frame is None:
-        about_algo_frame = Frame(root)
-        about_algo_frame.place(relx = 0.5, rely = 0.1,relwidth =0.5, relheight = 0.8)
-    else:
-        about_algo_frame=frame
-    label = Label(about_algo_frame,text = contents , font = "Helvetica 10")
-    label.place(relx=0, rely=0)
-    module_work["command"]= module_working(module,module_work,about_al,label,about_algo_frame)
-    # Flower_details_frame.place(relx=0.02, rely=0.02, relwidth=1, relheight=1)
-    root.mainloop()
-
-    label["text"]=contents
+    label["text"] = contents
     ima.Destroy()
 
 
@@ -226,7 +216,7 @@ def flower_recognition(old_frame, check_call=None):
     label = Label(flower_recognition_frame, text="Path of the File", font='Helvetica 10')
     label.place(relx=0.03, rely=0.2, relwidth=0.48, relheight=0.15)
     chose = ImageButton(flower_recognition_frame, image=get_gui_image("choose_flower"),
-                        second_image=get_gui_image("choose_flower"), bg="white", font="Helvetica 18 bold", bd=0,
+                        second_image=get_gui_image("choose_file"), bg="white", font="Helvetica 18 bold", bd=0,
                         command=lambda: choose(label))
     chose.place(relx=0.03, rely=0.35)
 
@@ -446,6 +436,75 @@ def predict_survivor(sent1,sent2,sent3,sent4,sent5,sent6,titanic_survivor_frame)
                                                                                             relheight=0.1)
 
 
+
+
+def sudoku(old_frame, check_call = Frame):
+    if check_call is None:
+        second_menu(old_frame, "Sudoku Solver", sudoku)
+    sudoku_solver_frame = Frame(root, bg="white")
+    sudoku_solver_frame.place(relx=0.0, rely=0.0, relheight=1, relwidth=1)
+    toolbar_and_menu(sudoku_solver_frame, "Sudoku Solver")
+    error_label=Label(sudoku_solver_frame,text="", font = "Helvetica 18").place(relx=0.7,rely=0.5)
+    def choose(label):
+        label["text"] = tkinter.filedialog.askopenfilename()
+        if (len(label["text"])>0):
+            submit = ImageButton(sudoku_solver_frame, image=get_gui_image("verify_sudoku"),
+                                 second_image=get_gui_image("verify_sudoku"), bd=0, bg="white",
+                                 font="Helvetica 18 bold",
+                                 command=lambda : sudoku_solver(submit))
+            submit.place(relx=0.31, rely=0.35)
+
+    label = Label(sudoku_solver_frame, text="Path of the File", font='Helvetica 10')
+    label.place(relx=0.03, rely=0.2, relwidth=0.48, relheight=0.15)
+    chose = ImageButton(sudoku_solver_frame, image=get_gui_image("choose_file"),
+                        second_image=get_gui_image("choose_file"), bg="white", font="Helvetica 18 bold", bd=0,
+                        command=lambda: choose(label))
+    chose.place(relx=0.03, rely=0.35)
+
+    def sudoku_solver(submit):
+        submit.destroy()
+
+        def remote_solve_grid():
+            ans = sudo.solve_grid(grid)
+            if (len(ans)!=9):
+                error_label["text"]=ans
+            else:
+                blan_sudoku_frame.destroy()
+                blank_sudoku_frame = Frame(sudoku_solver_frame)
+                blank_sudoku_frame.place(relx=0.38, rely=0.45, relwidth=0.300, relheight=0.540)
+                entries = []
+                ImageLabel(blank_sudoku_frame, get_gui_image("empty_sudoku"), 0, 0)
+                for i in range(1, 10):
+                    for j in range(1, 10):
+                        entries.append(
+                            Entry(blank_sudoku_frame, bg="white", relief=FLAT, width=1, font="Helvetica 23 bold"))
+                        entries[-1].grid(row=i, column=j, padx=(13, 11), pady=(5, 0),
+                                         sticky="nsew")  # Grid the last item in entries
+                        entries[-1].insert(0, ans[i - 1][j - 1])
+        grid =sudo.solve_sudo(label["text"])
+        ImageLabel(sudoku_solver_frame,get_image("Files/Sudoku_Solver/sudo.png"),0.03,0.45)
+        blan_sudoku_frame = Frame(sudoku_solver_frame)
+        blan_sudoku_frame.place(relx=0.38,rely=0.45,relwidth=0.300,relheight=0.540)
+        entries = []
+        ImageLabel(blan_sudoku_frame, get_gui_image("empty_sudoku"), 0, 0)
+        for i in range(1,10):
+            for j in range(1, 10):
+                entries.append(Entry(blan_sudoku_frame,bg ="white",relief=FLAT, width=1,font = "Helvetica 23 bold"))
+                entries[-1].grid(row=i, column=j,padx=(13,11), pady=(5, 0),sticky="nsew")  # Grid the last item in entries
+                entries[-1].insert(0,grid[i-1][j-1])
+                #entries[-1].insert(0, 8)
+
+        img = get_gui_image("get_solution")
+        get_sol = ImageButton(sudoku_solver_frame, image=img,
+                             second_image=img, bd=0, bg="white",
+                             font="Helvetica 18 bold",
+                             command=remote_solve_grid)
+        get_sol.place(relx=0.7, rely=0.9)
+        #root.mainloop()
+
+
+
+
 def main_menu(old_frames):
     for old_frame in old_frames:
         if old_frame is None:
@@ -530,6 +589,11 @@ def main_menu(old_frames):
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
                 command=lambda: sentiment_analysis(Menu_frame)).grid(row=3, column=1)
 
+    image = get_gui_image("Sudoku Solver")
+    description_img = get_gui_image("Sudoku Solver about")
+    ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
+                command=lambda: sudoku(Menu_frame)).grid(row=3, column=2)
+
     Button(Menu_frame, text="Hello, Machine", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
            command=lambda: main_menu([frame])).grid(row=6, column=1)
 
@@ -548,6 +612,13 @@ class ImageButton(Button):
 
     def on_leave(self, e):
         self['image'] = self.default_image
+
+    def change_picture_and_pos(self,img):
+        self.default_image=img
+        self.second_image = img
+
+    def get(self):
+        return self
 
 
 class ImageLabel(Frame):
@@ -603,6 +674,19 @@ class A(threading.Thread):
         # # word_vector = KeyedVectors.load_word2vec_format(
         # #     "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
         # toaster.show_toast("Odd One Out and Word Analogy is ready to run")
+        sentiment = __import__('sentiment', globals())
+        Spam = __import__('Spam', globals())
+        glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
+        for line in glove:
+            value = line.split()
+            word = value[0]
+            coefficient = np.asarray(value[1:], dtype=float)
+            glove_dictionary[word] = coefficient
+        toaster.show_toast("Odd One Out is ready to run")
+        global word_vector
+        # word_vector = KeyedVectors.load_word2vec_format(
+        #     "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
+        toaster.show_toast("Odd One Out and Word Analogy is ready to run")
 
 def close():
     sys.exit(0)
