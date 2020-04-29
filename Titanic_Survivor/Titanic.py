@@ -166,9 +166,9 @@ for fx in X.columns:
 d=DecisionTree()
 d.train(data_clean)
 
-y_pred = []
-for ix in range(data_clean.shape[0]):
-     y_pred.append(d.predict(data_clean.loc[ix]))
+# y_pred = []
+# for ix in range(data_clean.shape[0]):
+#      y_pred.append(d.predict(data_clean.loc[ix]))
 
 #print(y_pred)
 

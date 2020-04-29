@@ -15,8 +15,9 @@ from email.mime.text import MIMEText
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(9, "Gender_Recog/")
+sys.path.insert(7, "Sentiment_Analysis/")
 
-import emojii , Flowers, gender
+import emojii , Flowers, gender , sentiment
 
 def second_menu(old_frame, module, func):
     old_frame.destroy()
@@ -582,19 +583,15 @@ class A(threading.Thread):
         sys.path.insert(1, "Face_Recog/")
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
-        sys.path.insert(7, "Sentiment_Analysis/")
-        #sys.path.insert(8, "Titanic_Survivor/")
-
-        sentiment = __import__('sentiment',globals())
+        sys.path.insert(8, "Titanic_Survivor/")
         sys.path.insert(6, "Spam_or_Ham/")
 
-        #Titanic = __import__('Titanic', globals())
+        Titanic = __import__('titanic', globals())
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
-        # odd_one_out = __import__('odd_one_out', globals())
-        # word_analogy = __import__('word_analogy', globals())
-        # sentiment = __import__('sentiment', globals())
-        # Spam = __import__('Spam', globals())
+        odd_one_out = __import__('odd_one_out', globals())
+        word_analogy = __import__('word_analogy', globals())
+        Spam = __import__('Spam', globals())
         # glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
         # for line in glove:
         #     value = line.split()
