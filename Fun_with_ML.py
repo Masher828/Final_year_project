@@ -11,14 +11,15 @@ from win32api import GetSystemMetrics
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
 sys.path.insert(2, "Emoji_predictor/")
 sys.path.insert(3, "Image_Classification/")
 sys.path.insert(9, "Gender_Recog/")
 sys.path.insert(10, "Sudoku_Solver/")
 sys.path.insert(11, "Digit_Recognition/")
 
+
 import emojii, Flowers, gender, sudo, Digit_Recognition
+
 
 
 
@@ -730,17 +731,36 @@ class A(threading.Thread):
         sys.path.insert(1, "Face_Recog/")
         sys.path.insert(4, "odd_one_out/")
         sys.path.insert(5, "Word_analogy/")
+        sys.path.insert(8, "Titanic_Survivor/")
+        sys.path.insert(6, "Spam_or_Ham/")
         sys.path.insert(7, "Sentiment_Analysis/")
-        # sys.path.insert(8, "Titanic_Survivor/")
+
 
         sentiment = __import__('sentiment', globals())
         sys.path.insert(6, "Spam_or_Ham/")
 
-        # Titanic = __import__('Titanic', globals())
+        Titanic = __import__('Titanic', globals())
+
+
+
+        Titanic = __import__('titanic', globals())
+
         Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
+        Spam = __import__('Spam', globals())
+        # glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
+        # for line in glove:
+        #     value = line.split()
+        #     word = value[0]
+        #     coefficient = np.asarray(value[1:], dtype=float)
+        #     glove_dictionary[word] = coefficient
+        # toaster.show_toast("Odd One Out is ready to run")
+        # global word_vector
+        # # word_vector = KeyedVectors.load_word2vec_format(
+        # #     "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
+        # toaster.show_toast("Odd One Out and Word Analogy is ready to run")
         sentiment = __import__('sentiment', globals())
         Spam = __import__('Spam', globals())
         glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
