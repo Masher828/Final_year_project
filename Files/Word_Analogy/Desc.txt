@@ -1,0 +1,2 @@
+Find the relationship between first and second word and then give word 
+having same relationship with third word.

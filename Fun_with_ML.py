@@ -16,9 +16,14 @@ sys.path.insert(3, "Image_Classification/")
 sys.path.insert(9, "Gender_Recog/")
 sys.path.insert(10, "Sudoku_Solver/")
 sys.path.insert(11, "Digit_Recognition/")
+sys.path.insert(1, "Face_Recog/")
+sys.path.insert(4, "odd_one_out/")
+sys.path.insert(5, "Word_analogy/")
+sys.path.insert(8, "Titanic_Survivor/")
+sys.path.insert(6, "Spam_or_Ham/")
+sys.path.insert(7, "Sentiment_Analysis/")
 
-
-import emojii, Flowers, gender, sudo, Digit_Recognition
+import emojii, Flowers, gender, sudo, Digit_Recognition, Face_Recognition
 
 
 
@@ -36,7 +41,10 @@ def second_menu(old_frame, module, func):
     img = get_gui_image(module + " big")
 
     ima = ImageLabel(second_menu_frame, image=img, relx=0.7, rely=0.2)
-    Label(second_menu_frame, text="will add through .txt file same sa that in menu", bg="white", font="Helvetica 15",
+    path = "Files/"
+    data = open(path + "_".join(module.split(" ")) + "/DESC.txt", encoding="utf8")
+    contents = data.read()
+    Label(second_menu_frame, text=contents, bg="white", font="Helvetica 15",
           anchor=W).place(relx=0.013, rely=0.27, relwidth=0.5, relheight=0.2)
     Label(second_menu_frame, text=module, bg="white", font="Helvetica 25 bold").place(x=0.011, rely=0.17)
     contents = ""
@@ -63,9 +71,13 @@ def second_menu(old_frame, module, func):
                              command=lambda: doubt(second_menu_frame, module, label, ima)).place(relx=0.049, rely=0.9)
     root.mainloop()
 
-
+to_destroy=[]
 def doubt(second_menu_frame, module, label, ima):
-    ima.Destroy()
+    for widget in ima:
+        try:
+            widget.destroy()
+        except:
+            widget.Destroy()
     label["text"] = ""
     enter_doubt_label = Label(second_menu_frame, text="Enter Your Doubt", font="Helvetica 20 bold", bg="white")
     enter_doubt_label.place(relx=0.5, rely=0.1)
@@ -89,6 +101,7 @@ def doubt(second_menu_frame, module, label, ima):
                                                      enter_email_entry.get("1.0", "end-1c"), module, doubt_label,
                                                      email_label, to_destroy, submit_doubt, label))
     submit_doubt.place(relx=0.9, rely=0.9)
+    to_destroy.append(submit_doubt)
 
 
 def query(doubt, email, subject, doubt_label, email_label, to_destroy, butt, label):
@@ -134,7 +147,11 @@ def about_algo(module, label, ima):
     data = open(path + "_".join(module.split(" ")) + "/about.txt", encoding="utf8")
     contents = data.read()
     label["text"] = contents
-    ima.Destroy()
+    for widget in ima:
+        try:
+            widget.destroy()
+        except:
+            widget.Destroy()
 
 
 def module_working(module, label, ima):
@@ -142,7 +159,11 @@ def module_working(module, label, ima):
     data = open(path + "_".join(module.split(" ")) + "/steps.txt", encoding="utf8")
     contents = data.read()
     label["text"] = contents
-    ima.Destroy()
+    for widget in ima:
+        try:
+            widget.destroy()
+        except:
+            widget.Destroy()
 
 
 def word_analog(old_frame, check_call=None):
@@ -727,13 +748,8 @@ def about():
 class A(threading.Thread):
     def run(self):
         toaster = ToastNotifier()
-        global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
-        sys.path.insert(1, "Face_Recog/")
-        sys.path.insert(4, "odd_one_out/")
-        sys.path.insert(5, "Word_analogy/")
-        sys.path.insert(8, "Titanic_Survivor/")
-        sys.path.insert(6, "Spam_or_Ham/")
-        sys.path.insert(7, "Sentiment_Analysis/")
+        global  Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
+
 
 
         sentiment = __import__('sentiment', globals())
@@ -743,9 +759,9 @@ class A(threading.Thread):
 
 
 
-        Titanic = __import__('titanic', globals())
+        Titanic = __import__('Titanic', globals())
 
-        Face_Recognition = __import__('Face_Recognition', globals())
+        #Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
@@ -777,7 +793,7 @@ class A(threading.Thread):
 
 
 def close():
-    sys.exit(0)
+    root.destroy()
 
 
 def minimize():

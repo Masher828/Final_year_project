@@ -1,0 +1,1 @@
+Classifies text entered by the user whether it is positive or negative.

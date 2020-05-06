@@ -1,0 +1,1 @@
+Classifies mails/texts as spam or ham based on the already collected data.

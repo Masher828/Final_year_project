@@ -1,0 +1,1 @@
+Picks out the odd one among the list of names entered by user.
