@@ -1,3 +1,6 @@
+Flower Classification
+Software used: Pycharm
+Libraries used: Numpy,Keras,cv2
 Steps to construct a model to recognize Flowers
 Step 1  : Initially, we should find a dataset of different flowers to train our model.
 Step 2  : Dataset can be found on the kaggle and other similar websites.

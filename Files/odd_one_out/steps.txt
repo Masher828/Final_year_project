@@ -1,3 +1,6 @@
+Odd One Out
+Software used: Pycharm
+Libraries used: scikit-learn,Numpy,Gensim
 Wonder how this models work ??
 Step 1 : download the word vector either glove vector or google word to vec.
 step 2 : create the dictionary of all the words in the word vector such that every word is matched with it's vector.

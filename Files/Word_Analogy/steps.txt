@@ -1,3 +1,6 @@
+Word Analogy
+Software used: Pycharm
+Libraries used: scikit-learn
 Wonder how this works ?
 Step 1 : download the google word 2 vec.
 Step 2 : Create dictionary of the word 2 vec such that each word is mapped with it's corresponding vector.

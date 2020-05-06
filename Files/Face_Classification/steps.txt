@@ -1,3 +1,6 @@
+Face Classification
+Software used: Pycharm
+Libraries used: Numpy,cv2,Pandas,scikit-learn
 Wonder how this module works??
 Step 1 : Firstly we have to record the face of the user
     step 1.1 : For recording the face first we have to detect the face in the image
