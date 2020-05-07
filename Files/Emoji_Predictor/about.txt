@@ -1,0 +1,32 @@
+This model is based on the Deep Learning 
+Deep learning is an artificial intelligence function that imitates the workings of the human brain in processing data and
+creating patterns for use in decision making. Deep learning is a subset of machine learning in artificial intelligence (AI)
+that has 
+networks capable of learning unsupervised from data that is unstructured or unlabeled. Also known as deep neural learning 
+or deep neural network.
+Andrew Ng from Coursera and Chief Scientist at Baidu Research formally founded Google Brain that eventually resulted in 
+the productization of deep learning technologies across a large number of Google services.
+In early talks on deep learning, Andrew described deep learning in the context of traditional artificial neural networks.
+ In the 2013 talk titled “Deep Learning, 
+Self-Taught Learning and Unsupervised Feature Learning” he described the idea of deep learning as:
+
+Using brain simulations, hope to:
+
+– Make learning algorithms much better and easier to use.
+
+– Make revolutionary advances in machine learning and AI.
+
+I believe this is our best shot at progress towards real AI
+Recurrent Neural Network is a generalization of feedforward neural network that has an internal memory. RNN is recurrent in 
+nature as it performs the same function for every input of data while the output of the current input depends on the past one 
+computation. After producing the output, it is copied and sent back into the recurrent network. For making a decision, it 
+considers the current input and the output that it has learned from the previous input.
+Long Short-Term Memory (LSTM) networks are a modified version of recurrent neural networks, which makes it easier to 
+remember past data in memory. The vanishing gradient problem of RNN is resolved here. LSTM is well-suited to classify, 
+process and predict time series given time lags of unknown duration. It trains the model by using back-propagation.
+Vanishing Gradient problem arises while training an Artificial Neural Network. This mainly occurs when the network parameters 
+and hyperparameters are not properly set. Parameters could be weights and biases while hyperparameters could be learning rate,
+ the number of epochs, the number of batches, etc.
+
+Because of this, your Deep Learning model may take longer time to train and learn from the data and sometimes may not train at 
+all and show error. This results in less or no convergence of the neural network.

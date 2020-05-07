@@ -73,11 +73,7 @@ def second_menu(old_frame, module, func):
 
 to_destroy=[]
 def doubt(second_menu_frame, module, label, ima):
-    for widget in ima:
-        try:
-            widget.destroy()
-        except:
-            widget.Destroy()
+    ima.Destroy()
     label["text"] = ""
     enter_doubt_label = Label(second_menu_frame, text="Enter Your Doubt", font="Helvetica 20 bold", bg="white")
     enter_doubt_label.place(relx=0.5, rely=0.1)
@@ -147,11 +143,7 @@ def about_algo(module, label, ima):
     data = open(path + "_".join(module.split(" ")) + "/about.txt", encoding="utf8")
     contents = data.read()
     label["text"] = contents
-    for widget in ima:
-        try:
-            widget.destroy()
-        except:
-            widget.Destroy()
+    ima.Destroy()
 
 
 def module_working(module, label, ima):
@@ -159,11 +151,7 @@ def module_working(module, label, ima):
     data = open(path + "_".join(module.split(" ")) + "/steps.txt", encoding="utf8")
     contents = data.read()
     label["text"] = contents
-    for widget in ima:
-        try:
-            widget.destroy()
-        except:
-            widget.Destroy()
+    ima.Destroy()
 
 
 def word_analog(old_frame, check_call=None):
@@ -615,10 +603,10 @@ def main_menu(old_frames):
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
                 command=lambda: gender_recognition(Menu_frame)).grid(row=2, column=3)
 
-    image = get_gui_image("Character Recognition")
-    description_img = get_gui_image("character recog about")
-    ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
-                command=lambda: character_recognition(Menu_frame)).grid(row=3, column=0)
+    # image = get_gui_image("Character Recognition")
+    # description_img = get_gui_image("character recog about")
+    # ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
+    #             command=lambda: character_recognition(Menu_frame)).grid(row=3, column=0)
 
     image = get_gui_image("Sentiment Analysis")
     description_img = get_gui_image("senti anal about")
@@ -633,7 +621,7 @@ def main_menu(old_frames):
     image = get_gui_image("Digit Recognition")
     description_img = get_gui_image("digit recog about")
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
-                command=lambda: digit_recognition(Menu_frame)).grid(row=3, column=3)
+                command=lambda: digit_recognition(Menu_frame)).grid(row=3, column=0)
 
     Button(Menu_frame, text="Hello, Machine", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
            command=lambda: main_menu([frame])).grid(row=6, column=1)
