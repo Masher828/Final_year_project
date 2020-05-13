@@ -1,0 +1,1 @@
+Generates the Emoji based on the text entered by the user

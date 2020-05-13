@@ -1,0 +1,1 @@
+It will recognize flower uploaded by user based on the features of the flower.

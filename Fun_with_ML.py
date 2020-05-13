@@ -16,9 +16,14 @@ sys.path.insert(3, "Image_Classification/")
 sys.path.insert(9, "Gender_Recog/")
 sys.path.insert(10, "Sudoku_Solver/")
 sys.path.insert(11, "Digit_Recognition/")
+sys.path.insert(1, "Face_Recog/")
+sys.path.insert(4, "odd_one_out/")
+sys.path.insert(5, "Word_analogy/")
+sys.path.insert(8, "Titanic_Survivor/")
+sys.path.insert(6, "Spam_or_Ham/")
+sys.path.insert(7, "Sentiment_Analysis/")
 
-
-import emojii, Flowers, gender, sudo, Digit_Recognition
+import emojii, Flowers, gender, sudo, Digit_Recognition, Face_Recognition
 
 
 
@@ -36,7 +41,10 @@ def second_menu(old_frame, module, func):
     img = get_gui_image(module + " big")
 
     ima = ImageLabel(second_menu_frame, image=img, relx=0.7, rely=0.2)
-    Label(second_menu_frame, text="will add through .txt file same sa that in menu", bg="white", font="Helvetica 15",
+    path = "Files/"
+    data = open(path + "_".join(module.split(" ")) + "/DESC.txt", encoding="utf8")
+    contents = data.read()
+    Label(second_menu_frame, text=contents, bg="white", font="Helvetica 15",
           anchor=W).place(relx=0.013, rely=0.27, relwidth=0.5, relheight=0.2)
     Label(second_menu_frame, text=module, bg="white", font="Helvetica 25 bold").place(x=0.011, rely=0.17)
     contents = ""
@@ -63,7 +71,7 @@ def second_menu(old_frame, module, func):
                              command=lambda: doubt(second_menu_frame, module, label, ima)).place(relx=0.049, rely=0.9)
     root.mainloop()
 
-
+to_destroy=[]
 def doubt(second_menu_frame, module, label, ima):
     ima.Destroy()
     label["text"] = ""
@@ -89,6 +97,7 @@ def doubt(second_menu_frame, module, label, ima):
                                                      enter_email_entry.get("1.0", "end-1c"), module, doubt_label,
                                                      email_label, to_destroy, submit_doubt, label))
     submit_doubt.place(relx=0.9, rely=0.9)
+    to_destroy.append(submit_doubt)
 
 
 def query(doubt, email, subject, doubt_label, email_label, to_destroy, butt, label):
@@ -594,10 +603,10 @@ def main_menu(old_frames):
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
                 command=lambda: gender_recognition(Menu_frame)).grid(row=2, column=3)
 
-    image = get_gui_image("Character Recognition")
-    description_img = get_gui_image("character recog about")
-    ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
-                command=lambda: character_recognition(Menu_frame)).grid(row=3, column=0)
+    # image = get_gui_image("Character Recognition")
+    # description_img = get_gui_image("character recog about")
+    # ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
+    #             command=lambda: character_recognition(Menu_frame)).grid(row=3, column=0)
 
     image = get_gui_image("Sentiment Analysis")
     description_img = get_gui_image("senti anal about")
@@ -612,7 +621,7 @@ def main_menu(old_frames):
     image = get_gui_image("Digit Recognition")
     description_img = get_gui_image("digit recog about")
     ImageButton(Menu_frame, second_image=description_img, image=image, bg="white", border="0",
-                command=lambda: digit_recognition(Menu_frame)).grid(row=3, column=3)
+                command=lambda: digit_recognition(Menu_frame)).grid(row=3, column=0)
 
     Button(Menu_frame, text="Hello, Machine", bg="#2196f3", fg="#00CDF8", font="Helvetica 18 bold",
            command=lambda: main_menu([frame])).grid(row=6, column=1)
@@ -727,13 +736,8 @@ def about():
 class A(threading.Thread):
     def run(self):
         toaster = ToastNotifier()
-        global Face_Recognition, Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
-        sys.path.insert(1, "Face_Recog/")
-        sys.path.insert(4, "odd_one_out/")
-        sys.path.insert(5, "Word_analogy/")
-        sys.path.insert(8, "Titanic_Survivor/")
-        sys.path.insert(6, "Spam_or_Ham/")
-        sys.path.insert(7, "Sentiment_Analysis/")
+        global  Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
+
 
 
         sentiment = __import__('sentiment', globals())
@@ -743,9 +747,9 @@ class A(threading.Thread):
 
 
 
-        Titanic = __import__('titanic', globals())
+        Titanic = __import__('Titanic', globals())
 
-        Face_Recognition = __import__('Face_Recognition', globals())
+        #Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
@@ -777,7 +781,7 @@ class A(threading.Thread):
 
 
 def close():
-    sys.exit(0)
+    root.destroy()
 
 
 def minimize():
