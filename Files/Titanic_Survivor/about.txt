@@ -1,0 +1,28 @@
+Machine learning is a method of data analysis that automates analytical model building. It is a branch of artificial 
+intelligence based on the idea that systems can learn from data, identify patterns and make decisions with minimal human
+intervention.Machine learning is the science of getting computers to act without being explicitly programmed. In the past
+decade, machine learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly
+improved understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times
+a day without knowing it.
+Machine learning is the science of getting computers to act without being explicitly programmed. In the past decade, 
+machine
+learning has given us self-driving cars, practical speech recognition, effective web search, and a vastly improved 
+understanding of the human genome. Machine learning is so pervasive today that you probably use it dozens of times a day 
+without knowing it.
+
+This model is based on the Decision Tree
+Decision tree algorithm falls under the category of supervised learning. 
+Supervised learning is when the model is getting trained on a labelled dataset. Labelled dataset is one which have both
+input and output parameters.
+A Decision tree is a flowchart like tree structure, where each internal node denotes a test on an attribute, each branch 
+represents an outcome of the test, and each leaf node (terminal node) holds a class label. In Decision Tree the major 
+challenge is to identification of the attribute for the root node in each level.This process is known as attribute 
+selection. We have many popular attribute selection methods but in this model we have used the Information Gain method.
+We can find the Information Gain on the basis of decrease in entropy after a data-set is split on an attribute.Constructing
+a decision tree is all about finding attribute that returns the highest information gain.
+
+Decision Tree Algorithm Pseudocode
+-Place the best attribute of the dataset at the root of the tree on the basis of attribute selection.
+-Split the training set into subsets. Subsets should be made in such a way that each subset contains data with the same 
+value for an attribute.
+-Repeat step 1 and step 2 on each subset until you find leaf nodes in all the branches of the tree.

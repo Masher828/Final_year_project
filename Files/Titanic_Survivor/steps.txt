@@ -1,0 +1,18 @@
+Titanic Survivor
+Software used: Pycharm
+Libraries used: Numpy,Pandas,OS,scikit-learn
+Wonder how this module works??
+Step 1 : Initially we have to download and load the train.csv file which will be available on Kaggle Website.
+Step 2 : After loading the train.csv file we have to preprocessing the file to remove the columns which will be not used in
+our model.
+Step 3 : Then we have to divide the data into two columns input and output. Input columns contains the entries through 
+which the model is trained like Pclass, Sex, Age, Fare and output columns contain the Survived class.
+Step 4 : We have to divide the data because the model is trained on the basis of input columns not the basis of output 
+columns.
+Step 5 : Then we have to create the function of Entropy and Information gain through which we will select the root node 
+of the decison tree. The feature which will have high value of information gain will be root node of Decision tree.
+Step 6 : Now we will have to create the Decision tree class in this class we will making the decision tree features
+on the basis of input columns. The tree features will making on the basis of how much depth we will given in the model.
+Step 7 : After that we will have to predict whether the person is survive or dead on the basis of argmax value of 
+information gain.
+Step 8 : Now we have to trained our model on the training datasets.
