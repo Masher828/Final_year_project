@@ -1,0 +1,14 @@
+Sentiment Analysis
+Software used: Pycharm
+Libraries used: Numpy,NLTK,random,stopwords
+Wonder how this module works??
+Step 1 : Initially we have to download and load the data with the help of nltk library.
+Step 2 : We will download the twitter dataset by nltk. 
+Step 3 : After that we will tokenized the data or samples.
+Step 4 : Now we will remove the noisy data for eg:-@ we will use twitter dataset which
+contain @ in username which does not convey any meaning.
+Step 5 : After that we will lemmatization the words again.
+Step 6 :Lemmatisation is the process of grouping together the forms of a word so they 
+can be analysed as a single item.
+Step 7 : Now we will build the naive bayes classifer model with the help of bayes theorem.
+Step 8 : Now we have to trained our model on the training datasets and making predictions to check the accuracy.

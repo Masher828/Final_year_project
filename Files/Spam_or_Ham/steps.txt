@@ -1,0 +1,13 @@
+Spam or Ham
+Software used: Pycharm
+Libraries used: Numpy,Pandas,NLTK,Wordcloud
+Wonder how this module works??
+Step 1 : Initially we have to download and load the train.csv file which will be available on Kaggle Website.
+Step 2 : After loading the spam.csv file we have to preprocessing the file to remove the unnamed columns.
+Step 3 : To test our model we should split the data into train dataset and test dataset. We will use 75% of the 
+dataset as train dataset and the rest as test dataset.
+Step 4 : Now we will use the wordcloud library for the most repeated words in spam or ham messages.
+Step 5 : before starting to build the model we have to preprocess the messages and then tokenize the messages.
+Step 6 : Tokenization is the task of splitting up a message into pieces and throwing away the punctuation characters.
+Step 7 : Now we have to build classifier on the basis of Bayes theorem.
+Step 8 : Now we have to train model and making prediction to check the model accuracy.
