@@ -195,14 +195,14 @@ def analyzer(sent):
     preds_tf_idf = sc_tf_idf.predict(testData['message'])
     metrics(testData['label'], preds_tf_idf)
 
-    # sc_bow = SpamClassifier(trainData, 'bow')
-    # sc_bow.train()
-    # preds_bow = sc_bow.predict(testData['message'])
-    # metrics(testData['label'], preds_bow)
+    sc_bow = SpamClassifier(trainData, 'bow')
+    sc_bow.train()
+    preds_bow = sc_bow.predict(testData['message'])
+    metrics(testData['label'], preds_bow)
     temp = sc_tf_idf.classify(sent)
     #print(temp)
     if temp ==0 :
-        temp = "Spam"
-    else:
         temp = "Ham"
+    else:
+        temp = "spam"
     return(temp)

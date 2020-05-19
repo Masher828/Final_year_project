@@ -738,20 +738,10 @@ class A(threading.Thread):
         toaster = ToastNotifier()
         global  Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
 
-
-        sys.path.insert(6, "Spam_or_Ham/")
-
-
-
-
-
-
-
         #Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
         odd_one_out = __import__('odd_one_out', globals())
         word_analogy = __import__('word_analogy', globals())
-        Spam = __import__('Spam', globals())
         # glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
         # for line in glove:
         #     value = line.split()
@@ -763,6 +753,7 @@ class A(threading.Thread):
         # # word_vector = KeyedVectors.load_word2vec_format(
         # #     "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
         # toaster.show_toast("Odd One Out and Word Analogy is ready to run")
+        Titanic = __import__('titanic',globals())
         sentiment = __import__('sentiment', globals())
         Spam = __import__('Spam', globals())
         glove = open("Files/Emoji_Predictor/glove.6B.50d.txt", encoding='utf-8')
@@ -772,7 +763,7 @@ class A(threading.Thread):
             coefficient = np.asarray(value[1:], dtype=float)
             glove_dictionary[word] = coefficient
         toaster.show_toast("Odd One Out is ready to run")
-        #global word_vector
+    #global word_vector  Z5
         # word_vector = KeyedVectors.load_word2vec_format(
         #     "Files/Word_Analogy/GoogleNews-vectors-negative300.bin", binary=True)
         toaster.show_toast("Odd One Out and Word Analogy is ready to run")
