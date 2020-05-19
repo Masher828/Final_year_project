@@ -1,0 +1,17 @@
+Digit Recognition
+Software used: Pycharm
+Libraries used: Math,Numpy,cv2,Keras
+Wonder how this module works??
+Step 1 : Initially we have to download and load the mnist training data, its labels and the testing data and its labels. 
+Step 2 : After that the image data cannot be fed directly into the model so we need to perform some operations and process
+the data to make it ready for our neural network.
+Step 3 : After that we will create our CNN model.
+Step 4 : The cnn model consists of convolutional and pooling layers. It works better for data that are represented as 
+grid structures, this is the reason why CNN works well for image classification problems.
+Step 5 : We also have to make sure that the number of epochs is not too large as if it is large we will end up overfitting
+              our model.
+Step 6 : Overfitting means that our model will work on our dataset but any image outside the dataset will not be recognized
+              properly.
+Step 7 : Opposite of Overfitting is Underfitting in this our model cannot even recognize the image of the dataset on which 
+              it is trained.
+Step 8 : After the we will trained our model. It takes the training data, validation data, epochs, and batch size.

@@ -1,0 +1,17 @@
+Gender Recognition
+Software used: Pycharm
+Libraries used: Numpy,Pandas,scikit-learn,Keras
+Wonder how this module works??
+Step 1 : Initially we have to download and load the Male-Name.csv and Female-Name.csv file which will be available on
+Kaggle Website.
+Step 2 : After loading the both csv file we have to preprocessing the file to convert uppercse character into lowercase 
+character.
+Step 3 : After that we will create the architecture for model sequential.
+Step 4 : In our model we will use the LSTM layer. We have discussed about LSTM in about section.
+Step 5 : We also have to make sure that the number of epochs is not too large as if it is large we will end up overfitting
+              our model.
+Step 6 : Overfitting means that our model will work on our dataset but any text outside the dataset will not be recognized
+              properly.
+Step 7 : Opposite of Overfitting is Underfitting in this our model cannot even recognize the text of the dataset on which 
+              it is trained.
+Step 8 : After the we will trained our model on the preporcessed data.
