@@ -476,23 +476,6 @@ def sudoku(old_frame, check_call=Frame):
     def sudoku_solver(submit):
         submit.destroy()
 
-        def remote_solve_grid():
-            ans = sudo.solve_grid(grid)
-            if len(ans) != 9:
-                error_label["text"] = ans
-            else:
-                blan_sudoku_frame.destroy()
-                blank_sudoku_frame = Frame(sudoku_solver_frame)
-                blank_sudoku_frame.place(relx=0.38, rely=0.45, relwidth=0.300, relheight=0.540)
-                entries = []
-                ImageLabel(blank_sudoku_frame, get_gui_image("empty_sudoku"), 0, 0)
-                for i in range(1, 10):
-                    for j in range(1, 10):
-                        entries.append(
-                            Label(blank_sudoku_frame, text =ans[i - 1][j - 1], bg="white",fg = "black", relief=FLAT, width=1, font="Helvetica 19 bold"))
-                        entries[-1].grid(row=i, column=j, padx=(12, 13), pady=(7, 2),
-                                         sticky="nsew")  # Grid the last item in entries
-                        #entries[-1].insert(0, ans[i - 1][j - 1])
 
         grid = sudo.solve_sudo(label["text"])
         ImageLabel(sudoku_solver_frame, get_image("Files/Sudoku_Solver/sudo.png"), 0.03, 0.45)
@@ -509,11 +492,48 @@ def sudoku(old_frame, check_call=Frame):
                 # entries[-1].insert(0, 8)
 
         img = get_gui_image("get_solution")
+
+        def remote_solve_grid():
+            i=0
+            j=0
+            print(grid)
+            print(len(entries))
+            while(i<9):
+                print(i,j)
+                grid[i][j%9]=int(entries[j].get())
+                j += 1
+                if j%9 ==0:
+                    i=i+1
+
+            print(type(grid))
+            print(grid[0])
+            print(type(grid[0][0]))
+            print(grid[0][8])
+            print(grid)
+            ans = sudo.solve_grid(grid)
+            if len(ans) != 9:
+                error_label["text"] = ans
+            else:
+                blan_sudoku_frame.destroy()
+                blank_sudoku_frame = Frame(sudoku_solver_frame)
+                blank_sudoku_frame.place(relx=0.38, rely=0.45, relwidth=0.300, relheight=0.540)
+                ent = []
+                ImageLabel(blank_sudoku_frame, get_gui_image("empty_sudoku"), 0, 0)
+                for i in range(1, 10):
+                    for j in range(1, 10):
+                        ent.append(
+                            Label(blank_sudoku_frame, text=ans[i - 1][j - 1], bg="white", fg="black", relief=FLAT,
+                                  width=1, font="Helvetica 19 bold"))
+                        ent[-1].grid(row=i, column=j, padx=(12, 13), pady=(7, 2),
+                                     sticky="nsew")  # Grid the last item in entries
+                        # entries[-1].insert(0, ans[i - 1][j - 1])
         get_sol = ImageButton(sudoku_solver_frame, image=img,
                               second_image=img, bd=0, bg="white",
                               font="Helvetica 18 bold",
                               command=remote_solve_grid)
         get_sol.place(relx=0.7, rely=0.9)
+
+
         # root.mainloop()
 
 
