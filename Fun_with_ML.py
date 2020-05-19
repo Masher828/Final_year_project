@@ -739,15 +739,13 @@ class A(threading.Thread):
         global  Face_Record, odd_one_out, word_analogy, sentiment, Titanic, Spam
 
 
-
-        sentiment = __import__('sentiment', globals())
         sys.path.insert(6, "Spam_or_Ham/")
 
-        Titanic = __import__('Titanic', globals())
 
 
 
-        Titanic = __import__('Titanic', globals())
+
+
 
         #Face_Recognition = __import__('Face_Recognition', globals())
         Face_Record = __import__('Face_Record', globals())
